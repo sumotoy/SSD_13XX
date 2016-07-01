@@ -5,10 +5,10 @@ A very fast and full featured driver for SOLOMON SYSTECH SSD1331 and SSD1351 OLE
   - SSD_1331: Hardware accellerated
   - SSD_1351: Hardware accellerated
 
-Background:<br>
+<b>Background:</b><br>
 I got my first SSD_1331 on Ebay, find a library compatible at Adafruit but it's really slow, poor featured and uses just one accellerated primitive and has several issues so I decided to write a new one from scratch.<br>
 
-Features:<br>
+<b>Features:</b><br>
  - Very fast
  - Uses all Hardware accellerated routines
  - SPI transaction compatible, play nice with other SPI devices.
