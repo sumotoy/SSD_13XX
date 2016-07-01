@@ -5,7 +5,7 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 
 <b>Driver supported so far:</b><br>
   - SSD_1331: Hardware accellerated
-  - SSD_1351: Hardware accellerated
+  - SSD_1351: Hardware accellerated (1.27") (1.5")
 
 <b>Background:</b><br>
 I got my first SSD_1331 on Ebay, find a library compatible at Adafruit but it's really slow, poor featured and uses just one accellerated primitive and has several issues so I decided to write a new one from scratch.<br>
