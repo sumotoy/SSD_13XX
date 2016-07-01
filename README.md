@@ -1,3 +1,20 @@
 # SSD_13XX
-A very fast and full featured driver for SSD1331 and SSD1351 OLED compatible with Teensy's and many other MCU's
+A very fast and full featured driver for SOLOMON SYSTECH SSD1331 and SSD1351 OLED compatible with Teensy's and many other MCU's
 
+<b>Diver supported so far:</b><br>
+  - SSD_1331: Hardware accellerated
+  - SSD_1351: Hardware accellerated
+
+Background:<br>
+I got my first SSD_1331 on Ebay, find a library compatible at Adafruit but it's really slow, poor featured and uses just one accellerated primitive and has several issues so I decided to write a new one from scratch.<br>
+
+Features:<br>
+ - Very fast
+ - Uses all Hardware accellerated routines
+ - SPI transaction compatible, play nice with other SPI devices.
+ - Many CPU supported.
+ - Ultrafast Teensy's 3.0,3.1,3.2,3.4,3.5 SPI FIFO.
+ - Almost all chip features supported.
+ - LGPO Font accellerated rendering.
+ - Icon support.
+ - Image support.
