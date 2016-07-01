@@ -1,7 +1,8 @@
 # SSD_13XX
-A very fast and full featured driver for SOLOMON SYSTECH SSD1331 and SSD1351 OLED compatible with Teensy's and many other MCU's
+A very fast and full featured driver for SOLOMON SYSTECH SSD1331 and SSD1351 OLED compatible with Teensy's and many other MCU's.
+I have other 2 libraries here in github but have some issues and are quite old, this will replace both.
 
-<b>Diver supported so far:</b><br>
+<b>Driver supported so far:</b><br>
   - SSD_1331: Hardware accellerated
   - SSD_1351: Hardware accellerated
 
@@ -18,3 +19,4 @@ I got my first SSD_1331 on Ebay, find a library compatible at Adafruit but it's 
  - LGPO Font accellerated rendering.
  - Icon support.
  - Image support.
+ - Uses my TFT_9163C popular library format and commands, can share fonts,icons and images.
