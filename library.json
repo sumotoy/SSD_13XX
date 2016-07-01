@@ -1,0 +1,39 @@
+{
+  "name": "SSD_13XX",
+  "frameworks": "Arduino",
+  "platforms":
+  [
+	"Teensy",
+    "atmelavr",
+    "espressif",
+	"arm"
+  ],
+  "keywords": "display",
+  "description": "A very fast driver for SSD_13XX OLED displays that works with many MCU",
+  "version": "1.0",
+  "exclude": [
+	"doc",
+	"*.pdf"
+	],
+  "authors": 
+  {
+    "name": "sumotoy",
+    "email": "sumotoy@gmail.com",
+    "url": "http://sumotoy.com",
+	"maintainer": true
+  },  
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/sumotoy/SSD_13XX"
+  },
+  "dependencies":
+  {
+    "name": "SPI",
+    "frameworks": "arduino"
+},
+  "examples": [
+    "examples/*/*.ino",
+    "examples/*/*/*.ino"
+  ]
+}
