@@ -1,10 +1,11 @@
 # SSD_13XX
-A very fast and full featured driver for SOLOMON SYSTECH SSD1331 and SSD1351 OLED compatible with Teensy's and many other MCU's.
+A very fast and full featured driver for SOLOMON SYSTECH SSD1331, SSD1332 and SSD1351 OLED compatible with Teensy's and many other MCU's.
 I have other 2 libraries here in github but have some issues and are quite old, this will replace both.<br>
 <b>NOTE: Currently in development, not all files upped! Please wait this note disappear before download.</b><br>
 
 <b>Driver supported so far:</b><br>
   - SSD_1331: Hardware accellerated
+  - SSD_1332: Hardware accellerated
   - SSD_1351: Hardware accellerated (1.27") (1.5")
 
 <b>Background:</b><br>
