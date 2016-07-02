@@ -11,6 +11,16 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 <b>Driver that will never supported:</b><br>
  - SSD_1306: This device need a completely different library since it have no RAM.<br>
 
+<b>CPU Supported:</b><br>
+ - Teensy 3.0, 3.1, 3.2, 3.4, 3.5, LC
+ - Teensy 2.0 and variant, any Arduino 8 bit
+ - Arduino DUE
+ - ESP8266
+ - SPARK (next versions)
+ - Several ST (next versions)<br>
+
+<b>Note:</b>I will not support Arduino Zero, it cost a fortune, I suggest a Teensy!<br>
+
 <b>Background:</b><br>
 I got my first SSD_1331 on Ebay, find a library compatible at Adafruit but it's really slow, poor featured and uses just one accellerated primitive and has several issues so I decided to write a new one from scratch.<br>
 Unfortunatly these devices are similar each others but commands and methods can be really different, in particular SSD_1331/1332 lack of some important registers and it's tricky add rotation support.<br>
