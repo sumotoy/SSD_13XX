@@ -14,7 +14,8 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 <b>Background:</b><br>
 I got my first SSD_1331 on Ebay, find a library compatible at Adafruit but it's really slow, poor featured and uses just one accellerated primitive and has several issues so I decided to write a new one from scratch.<br>
 Unfortunatly these devices are similar each others but commands and methods can be really different, in particular SSD_1331/1332 lack of some important registers and it's tricky add rotation support.<br>
-I have 2 old libraries here on github, both old and still uses some Adafruit stuff but I have decided to get rid of all code and use much faster approach, the speed is really impressive compared to old stuff.
+I have 2 old libraries here on github, both old and still uses some Adafruit stuff but I have decided to get rid of all code and use much faster approach, the speed is really impressive compared to old stuff.<br>
+Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last libraries here on github, of course there's differences related to hardware (OLED don't have backlight pin, etc.)
 
 <b>Features:</b><br>
  - Extreme fast, very chip hardware limit.
