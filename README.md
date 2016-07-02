@@ -19,7 +19,7 @@ I have other 2 libraries here in github but have some issues and are quite old, 
  - SPARK (next versions)
  - Several ST (next versions)<br>
 
-<b>Note:</b>I will not support Arduino Zero, it cost a fortune, I suggest a Teensy!<br>
+<b>Note:</b>I will not support Arduino Zero, it cost a fortune, I suggest a Teensy that is much cheaper and more featured!<br>
 
 <b>Background:</b><br>
 I got my first SSD_1331 on Ebay, find a library compatible at Adafruit but it's really slow, poor featured and uses just one accellerated primitive and has several issues so I decided to write a new one from scratch.<br>
