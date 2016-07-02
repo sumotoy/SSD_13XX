@@ -19,7 +19,8 @@ I have other 2 libraries here in github but have some issues and are quite old, 
  - SPARK (next versions)
  - Several ST (next versions)<br>
 
-<b>Note:</b>I will not support Arduino Zero, it cost a fortune, I suggest a Teensy that is much cheaper and more featured!<br>
+<b>Note:</b> I will not support Arduino Zero, it cost a fortune, I suggest a Teensy that is much cheaper and more featured!<br>
+However, this is open source an released with GNU V3 so you can fork library and add Zero support yourself as you respect the GNU licence and leave intact any comment.<br>
 
 <b>Background:</b><br>
 I got my first SSD_1331 on Ebay, find a library compatible at Adafruit but it's really slow, poor featured and uses just one accellerated primitive and has several issues so I decided to write a new one from scratch.<br>
@@ -39,4 +40,8 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - Icon support.
  - Image support.
  - Gradients.
- - Uses my TFT_9163C popular library format and commands, can share fonts,icons and images.
+ - Uses my TFT_9163C popular library format and commands, can share fonts,icons and images.<br>
+
+<b>Licence:</b><br>
+Licenced under GNU V3.
+ 
