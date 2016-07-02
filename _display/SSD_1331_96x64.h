@@ -1,5 +1,5 @@
-#ifndef _SSD_1331_96x64P_H
-#define _SSD_1331_96x64P_H
+#ifndef _SSD_1331_96X64_H
+#define _SSD_1331_96X64_H
 #include <stdio.h>
 #include "../_includes/SSD_1331_registers.h"
 
@@ -22,7 +22,7 @@
 	---------------------------------------------------------------------------------------
 	Single Display Parameters
 	---------------------------------------------------------------------------------------
-	Display Type: SSD1331 96 x 64
+	Display Type: SSD_1331 96x64
 ===========================================================================================*/
 	/* Physical display size
 	*/
@@ -45,8 +45,6 @@
 	Vendors like to set his display as they like, result in offset that is different between models
 	Here's a offset map for any rotatio of the display, helping code to deal with this.
 	First index is rotation, second 2 parameters are offset in x and y axis. [rotation][x,y] */
-	
-	
 	//#define SSD_OFSTNEED
 	
 	#if defined(SSD_OFSTNEED)
@@ -58,7 +56,7 @@
 	};
 	#endif
 
-	//Initialization Parameters
+	
 	static const uint8_t	SSD_DISPLAYOFFSET		=	0x00;
 	static const uint8_t	SSD_PHASEPERIOD			=	0b10110001;
 	static const uint8_t	SSD_SETMULTIPLEX		=	0x3F;
@@ -79,5 +77,7 @@
 	static const uint8_t	SSD_CONTRAST_C			=	0x7D;
 
 	static const uint8_t 	SSD_GRAYTABLE[32]= 	{0x01,0x03,0x05,0x07,0x0A,0x0D,0x10,0x13,0x16,0x19,0x1C,0x20,0x24,0x28,0x2C,0x30,0x34,0x38,0x3C,0x40,0x44,0x48,0x4C,0x50,0x54,0x58,0x5C,0x60,0x64,0x68,0x6C,0x70};
-
+	
+	
+	
 #endif

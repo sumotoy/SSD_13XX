@@ -54,25 +54,32 @@
 		{0,0} //rot 3 - x,y
 	};
 	#endif
-
+	static const uint8_t	SSD_COMMANDLOCK1		=	0x12;
+	static const uint8_t	SSD_COMMANDLOCK2		=	0xB1;
+	static const uint8_t	SSD_MUXRATIO			=	127;
+	static const uint8_t	SSD_SETREMAP			=	0x74;
+	static const uint8_t	SSD_SETGPIO				=	0x00;
+	static const uint8_t	SSD_PRECHARGE2			=	0x01;
+	static const uint8_t	SSD_CONTRASTMASTER		=	0x0F;
+	static const uint8_t	SSD_FUNCTIONSELECT		=	0x01;
 	static const uint8_t	SSD_DISPLAYOFFSET		=	0x00;
 	static const uint8_t	SSD_PHASEPERIOD			=	0b10110001;
 	static const uint8_t	SSD_SETMULTIPLEX		=	0x3F;
-	static const uint8_t	SSD_STARTLINE			=	0x00;
+	static const uint8_t	SSD_STARTLINE			=	96;
 	static const uint8_t	SSD_FILL				=	0x01;
 	static const uint8_t	SSD_SETMASTER			=	0x8E;
 	static const uint8_t	SSD_POWERMODE			=	0x0B;
-	static const uint8_t	SSD_PRECHARGE			=	0x31;
-	static const uint8_t	SSD_CLOCKDIV			=	0xF0;
-	static const uint8_t	SSD_PRECHARGE_A			=	0x64;
-	static const uint8_t	SSD_PRECHARGE_B			=	0x78;
-	static const uint8_t	SSD_PRECHARGE_C			=	0x64;
+	static const uint8_t	SSD_PRECHARGE			=	0x33;
+	static const uint8_t	SSD_CLOCKDIV			=	0xF1;
+	static const uint8_t	SSD_SETVSL_A			=	0x64;
+	static const uint8_t	SSD_SETVSL_B			=	0xB5;
+	static const uint8_t	SSD_SETVSL_C			=	0x64;
 	static const uint8_t	SSD_PRECHARGELEVEL		=	0x3A;
-	static const uint8_t	SSD_VCOMH				=	0x3E;
+	static const uint8_t	SSD_VCOMH				=	0x05;
 	static const uint8_t	SSD_MASTERCURRENT		=	0x06;
-	static const uint8_t	SSD_CONTRAST_A			=	0x91;
-	static const uint8_t	SSD_CONTRAST_B			=	0x50;
-	static const uint8_t	SSD_CONTRAST_C			=	0x7D;
+	static const uint8_t	SSD_CONTRAST_A			=	0xC8;
+	static const uint8_t	SSD_CONTRAST_B			=	0xB5;
+	static const uint8_t	SSD_CONTRAST_C			=	0x55;
 
 	static const uint8_t 	SSD_GRAYTABLE[32]= 	{0x01,0x03,0x05,0x07,0x0A,0x0D,0x10,0x13,0x16,0x19,0x1C,0x20,0x24,0x28,0x2C,0x30,0x34,0x38,0x3C,0x40,0x44,0x48,0x4C,0x50,0x54,0x58,0x5C,0x60,0x64,0x68,0x6C,0x70};
 
