@@ -29,7 +29,7 @@ I have 2 old libraries here on github, both old and still uses some Adafruit stu
 Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last libraries here on github, of course there's differences related to hardware (OLED don't have backlight pin, etc.)
 
 <b>Features:</b><br>
- - Extreme fast, very chip hardware limit.
+ - Blazing fast, near chip hardware limits, expecially with Teensy's.
  - Easy to add display's.
  - Uses all chip Hardware accellerated routines.
  - Standard SPI & SPI transaction compatible, play nice with other SPI devices.
@@ -41,6 +41,19 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - Image support.
  - Gradients.
  - Uses my TFT_9163C popular library format and commands, can share fonts,icons and images.<br>
+
+<b>Unique commands: (differs from other libraries due different chip features)</b><br>
+ - copyArea: copy a portion of screen into another location (hardware acc)
+ - dimArea: dim a selected area
+ - scroll: this chip has an standalone hardware scroll
+ - defineScrollArea: since scroll is hardware, all is defined inside this function)
+ - clearArea:
+ - setColorDepth:8 or 16bit
+ - setColorOrder:RGB or BGR
+ - drawRect: the standard drawRect is provided, but this advanced version have borders. Hardware accellerated.
+ - mode:PWRSAVE It's almost equal to sleep, display goes off
+ - mode:DISP_DIM The display goes in Dim mode
+ - mode:PROTECT The chip logic don't accept any commands, just mode:NORMAL to goes off of protect mode.
 
 <b>Licence:</b><br>
 Licenced under GNU V3.
