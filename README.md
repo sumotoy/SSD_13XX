@@ -3,6 +3,9 @@ A very fast and full featured driver for SOLOMON SYSTECH SSD1331, SSD1332 and SS
 I have other 2 libraries here in github but have some issues and are quite old, this will replace both.<br>
 <b>NOTE: Currently in development, not all files upped! Please wait this note disappear before download.</b><br>
 
+<b>Current Version:</b><br>
+ - not yet released.
+
 <b>Driver supported so far:</b><br>
   - SSD_1331: (has hardware accelleration primitives)
   - SSD_1332: (has hardware accelleration primitives)
