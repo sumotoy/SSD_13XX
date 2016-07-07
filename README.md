@@ -23,15 +23,14 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 However, this is open source an released with GNU V3 so you can fork library and add Zero support yourself as you respect the GNU licence and leave intact any comment.<br>
 
 <b>Background:</b><br>
-I got my first SSD_1331 on Ebay, find a library compatible at Adafruit but it's really slow, poor featured and uses just one accellerated primitive and has several issues so I decided to write a new one from scratch.<br>
-Unfortunatly these devices are similar each others but commands and methods can be really different, in particular SSD_1331/1332 lack of some important registers and it's tricky add rotation support.<br>
-I have 2 old libraries here on github, both old and still uses some Adafruit stuff but I have decided to get rid of all code and use much faster approach, the speed is really impressive compared to old stuff.<br>
+I got my first SSD_1331 on Ebay, find a library compatible at Adafruit but I was extremely disappointed about performances/features and contains lot of bugs, so I decided to write a new one from scratch based on my popular TFT_ILI9163C.<br>
+Unfortunatly these devices are similar each others but commands and methods can be really different, in particular SSD_1331/1332 uses commands to send data when most chip uses dataTransfer.<br>
+I have 2 old libraries here on github, but digging inside datasheet I discover that I can get much more by rewrote almost everithing. As result I got all chip features enabled and the currently faster driver, much more than adafruit and works with all features at any screen rotation by using all the time his hardware accellerated primitives<br>
 Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last libraries here on github, of course there's differences related to hardware (OLED don't have backlight pin, etc.)
 
 <b>Features:</b><br>
  - Blazing fast, near chip hardware limits, expecially with Teensy's.
- - Easy to add display's.
- - Uses all chip Hardware accellerated routines.
+ - Any feature enabled for any rotation, using native hardware accellerated primitives.
  - Standard SPI & SPI transaction compatible, play nice with other SPI devices.
  - Many CPU supported.
  - Ultrafast Teensy's 3.0,3.1,3.2,3.4,3.5 SPI FIFO.
@@ -40,7 +39,10 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - Icon support.
  - Image support.
  - Gradients.
- - Uses my TFT_9163C popular library format and commands, can share fonts,icons and images.<br>
+ - Icon support (as seen in my last other libraries, use same icon file format).
+ - Image support (as seen in my last other libraries, use same image file format).
+ - User Font support (as seen in my last other libraries, use same font file format).
+ - Uses TFT_ILI9163C command format that have many features and covers commands used in many libraries so it will be easy convert code to work with this one.<br>
 
 <b>Unique commands: (differs from other libraries due different chip features)</b><br>
  - copyArea: copy a portion of screen into another location (hardware acc)
@@ -53,7 +55,8 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - drawRect: the standard drawRect is provided, but this advanced version have borders. Hardware accellerated.
  - mode:PWRSAVE It's almost equal to sleep, display goes off
  - mode:DISP_DIM The display goes in Dim mode
- - mode:PROTECT The chip logic don't accept any commands, just mode:NORMAL to goes off of protect mode.
+ - mode:PROTECT The chip logic don't accept any commands, just mode:NORMAL to goes off of protect mode.<br>
+
 
 <b>Licence:</b><br>
 Licenced under GNU V3.
