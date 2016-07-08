@@ -28,35 +28,13 @@
 	*/
 	static const int16_t	SSD_WIDTH	=	96;
 	static const int16_t	SSD_HEIGHT 	=	64;
-	//static const uint32_t	SSD_CGRAM		=	SSD_WIDTH * SSD_HEIGHT;
+	
 	/* Gamma Set*/
 	#define SSD_GAMMASET
-	/* Colorspace
-	Some display can use GBR colorspace or RGB (1:GBR - 0:RGB) */
-	//static const uint8_t	SSD_CSPACE 		= 	MADCTL_RGB;
-	static const uint8_t	SSD_CSPACE[4][2]	=	{
-		{0x72,0x76},				//rot0(0)
-			{0x71,0x75},			//rot1(90)
-				{0x60,0x64},		//rot2(180)
-					{0x63,0x67}		//rot3(270)
-	};
-	static const uint8_t	SSD_RGBORDER	= 0;//RGB
-	/* Offset
-	Vendors like to set his display as they like, result in offset that is different between models
-	Here's a offset map for any rotatio of the display, helping code to deal with this.
-	First index is rotation, second 2 parameters are offset in x and y axis. [rotation][x,y] */
-	//#define SSD_OFSTNEED
-	
-	#if defined(SSD_OFSTNEED)
-	static const uint8_t 	SSD_OFST[4][2] = {
-		{0,0},//rot 0 - x,y
-		{0,0},//rot 1 - x,y
-		{0,0},//rot 2 - x,y
-		{0,0} //rot 3 - x,y
-	};
-	#endif
 
-	
+	static const int16_t	SSD_COMSPLIT 			=	1;			//this unit needs com split
+	static const uint8_t	SSD_COLORDEPTH  		= 	16;			//8 or 16
+	static const uint8_t	SSD_RGBORDER			= 	0;			//0:RGB 1:
 	static const uint8_t	SSD_DISPLAYOFFSET		=	0x00;
 	static const uint8_t	SSD_PHASEPERIOD			=	0b10110001;
 	static const uint8_t	SSD_SETMULTIPLEX		=	0x3F;
@@ -75,9 +53,10 @@
 	static const uint8_t	SSD_CONTRAST_A			=	0x91;
 	static const uint8_t	SSD_CONTRAST_B			=	0x50;
 	static const uint8_t	SSD_CONTRAST_C			=	0x7D;
+	static const uint8_t	SSD_DIMMDESET_A			=	128;
+	static const uint8_t	SSD_DIMMDESET_B			=	128;
+	static const uint8_t	SSD_DIMMDESET_C			=	128;
+	static const uint8_t	SSD_DIMMDESET_PC		=	0x0F;//max 0x1F
 
 	static const uint8_t 	SSD_GRAYTABLE[32]= 	{0x01,0x03,0x05,0x07,0x0A,0x0D,0x10,0x13,0x16,0x19,0x1C,0x20,0x24,0x28,0x2C,0x30,0x34,0x38,0x3C,0x40,0x44,0x48,0x4C,0x50,0x54,0x58,0x5C,0x60,0x64,0x68,0x6C,0x70};
-	
-	
-	
 #endif
