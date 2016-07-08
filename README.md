@@ -12,7 +12,7 @@ I have other 2 libraries here in github but have some issues and are quite old, 
   - SSD_1351: (has hardware accelleration primitives) (1.27") (1.5")<br>
 
 <b>Driver that will never supported:</b><br>
- - SSD_1306: This device need a completely different library since it have no RAM.<br>
+ - SSD_1306: This device need a completely different library since it have no internal framebuffer.<br>
 
 <b>CPU Supported:</b><br>
  - Teensy 3.0, 3.1, 3.2, 3.4, 3.5, LC
