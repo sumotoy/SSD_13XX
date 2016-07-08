@@ -62,7 +62,7 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
 <b>Performances:</b><br>
 Early alpha wasnot working, only garbage on screen, it's here for reference<br>
 Alpha 1..2 was using absolute screen addressing (now abandoned)<br>
-Alpha 3..4 and beta's use new hardware rotation addressing.<br>
+Alpha 3..4 and beta's use new hardware rotation addressing. In Alpha 4 triangles rendering failed.<br>
 Beta 1..2 works and are usable, all function tested at any rotation.<br>
 CPU used for benchmarks: Teensy 3.2 at 96Mhz. Sketch:benchmarks_official.ino<br>
 Times are in Microseconds!<br>
