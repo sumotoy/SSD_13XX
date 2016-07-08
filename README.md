@@ -84,7 +84,7 @@ Times are in Microseconds!<br>
 	|Rounded rects (filled)	|10271	|8184	|5814	|5807	|5036	|5241	|5032	|
 	|Icon Render	|  	| 	|   	|    	|									|1404	|1312	|
 	
-More or less, Beta 2 it's the release candidate, you can note how amazing fast in some operation, for example 406 microsec for a complete screen erase, 277 microsecs for the complete line test, even text it's really fast..
+More or less, Beta 2 it's the release candidate, you can note how amazing fast in some operation, for example 406 microsec for a complete screen erase, 277 microsecs for the complete line test, even text it's really fast. In comparison, for the Adafruit one I have to use milliseconds, it's amazing slow (even using the fast SPI mode). I will up a table comparison (for fun) whe I release out this one.
 
 <b>Licence:</b><br>
 Licenced under GNU V3.
