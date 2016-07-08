@@ -21,8 +21,8 @@
 ===========================================================================================*/
 //registers-----------------------
 static const uint8_t CMD_NOP     			= 0xE3;//***Non operation
-static const int	 CMD_DLY_LINE			= 400;//SSD1351 400
-static const int	 CMD_DLY_FILL			= 800;//SSD1351 800
+static const int	 CMD_DLY_LINE			= 200;//SSD1351 400
+static const int	 CMD_DLY_FILL			= 400;//SSD1351 800
 static const uint8_t CMD_DRAWLINE 			= 0x21;
 static const uint8_t CMD_DRAWRECT 			= 0x22;
 static const uint8_t CMD_DRAWCOPY 			= 0x23;
