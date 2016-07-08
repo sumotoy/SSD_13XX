@@ -4,7 +4,7 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 <b>NOTE: Currently in development, not all files upped! Please wait this note disappear before download.</b><br>
 
 <b>Current Version:</b><br>
- - not yet released.
+ - 1.0r1: Tested only with various Teensy's. If not work with other CPU please report only, I NEVER tested the code with other CPU's so I expect this, but remember that is a preview and things gonna change soon.
 
 <b>Driver supported so far:</b><br>
   - SSD_1331: (has hardware accelleration primitives)
