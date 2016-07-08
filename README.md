@@ -1,5 +1,5 @@
 # SSD_13XX
-A very fast and full featured driver for Solomon Systech SSD1331, SSD1332 and SSD1351 drivers designed mainly for Oled's compatible with Teensy's and many other MCU's.
+A very fast and full featured driver for <b>Solomon Systech SSD1331, SSD1332 and SSD1351</b> drivers designed mainly for Oled's compatible with Teensy's and many other MCU's.
 I have other 2 libraries here in github but have some issues and are quite old, this will replace both.<br>
 <b>NOTE: Currently in development, not all files upped! Please wait this note disappear before download.</b><br>
 
