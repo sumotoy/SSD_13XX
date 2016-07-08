@@ -83,6 +83,8 @@ Times are in Microseconds!<br>
 	|Rounded rects (outline)	|1206	|2942|1619|1586|1585	|1587	|1588	|
 	|Rounded rects (filled)	|10271	|8184	|5814	|5807	|5036	|5241	|5032	|
 	|Icon Render	|  	| 	|   	|    	|									|1404	|1312	|
+	
+More or less, Beta 2 it's the release candidate, you can note how amazing fast in some operation, for example 406 microsec for a complete screen erase, 277 microsecs for the complete line test, even text it's really fast..
 
 <b>Licence:</b><br>
 Licenced under GNU V3.
