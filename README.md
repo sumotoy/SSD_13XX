@@ -59,7 +59,30 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - mode:PWRSAVE It's almost equal to sleep, display goes off
  - mode:DISP_DIM The display goes in Dim mode
  - mode:PROTECT The chip logic don't accept any commands, just mode:NORMAL to goes off of protect mode.<br>
+<b>Performances:</b><br>
+Early alpha wasnot working, only garbage on screen, it's here for reference<br>
+Alpha 1..2 was using absolute screen addressing (now abandoned)<br>
+Alpha 3..4 and beta's use new hardware rotation addressing.<br>
+Beta 1..2 works and are usable, all function tested at any rotation.<br>
+CPU used for benchmarks: Teensy 3.2 at 96Mhz. Sketch:benchmarks_official.ino<br>
+Times are in Microseconds!<br>
 
+	|test               |Early|alpha 1|alpha 2|alpha 3|alpha 4|beta 1|beta 2|
+	|-------------------|------|------|------|------|------|------|------|
+	|Screen fill	|409	|809	|807	|809	|808	|507	|406	|
+	|Text	|3983	|3907|3963|3891|2357|2378	|2270	|
+	|Text2	|9564	|9368|9517|9332|5047|5057	|4910	|
+	|Lines	|5576	|10976|10978|10974|5561|299|277	|
+	|Horiz/Vert Lines	|6827	|1800|1978|1964|1956	|1954	|1956	|
+	|Rectangles (outline)	|4508	|8916|8919|8915|1126	|1376	|1123	|
+	|Rectangles (filled)	|4509	|8924|8922|8920|1223	|1499	|1214	|
+	|Circles (filled)	|3635	|18787|4488|4482|4481	|4479	|4481	|
+	|Circles (outline)	|4697	|2851|2852|2849|2848	|2847	|2847	|
+	|Triangles (outline)	|517	|505|508|504|	503	|204	|183	|
+	|Triangles (filled)	|1916	|11087|4284|4274|276	|4274	|4275	|
+	|Rounded rects (outline)	|1206	|2942|1619|1586|1585	|1587	|1588	|
+	|Rounded rects (filled)	|10271	|8184	|5814	|5807	|5036	|5241	|5032	|
+	|Icon Render	|  	| 	|   	|    	|									|1404	|1312	|
 
 <b>Licence:</b><br>
 Licenced under GNU V3.
