@@ -1,5 +1,5 @@
-#ifndef _SSD_1331_REG_H_
-#define _SSD_1331_REG_H_
+#ifndef _SSD_1332_REG_H_
+#define _SSD_1332_REG_H_
 /*=========================================================================================
 	Part of SSD_13XX library
     Copyright (c) 2014/2015/2016, .S.U.M.O.T.O.Y., coded by Max MC Costa.
@@ -17,12 +17,12 @@
     You should have received a copy of the GNU General Public License
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 	---------------------------------------------------------------------------------------
-	SSD1331 Registers
+	SSD1332 Registers
 ===========================================================================================*/
 //registers-----------------------
 static const uint8_t CMD_NOP     			= 0xE3;//SSD1332
-static const int	 CMD_DLY_LINE			= 200;//SSD1351 400
-static const int	 CMD_DLY_FILL			= 400;//SSD1351 800
+static const int	 CMD_DLY_LINE			= 400;//400
+static const int	 CMD_DLY_FILL			= 800;//800
 static const uint8_t CMD_DRAWLINE 			= 0x21;//SSD1332
 static const uint8_t CMD_DRAWRECT 			= 0x22;//SSD1332
 static const uint8_t CMD_DRAWCOPY 			= 0x23;//SSD1332
@@ -69,12 +69,22 @@ static const uint8_t CMD_SETROW   			= 0x75;//SSD1332
 
 
 
-/*
+/* The remap command
+1331
 7,6) 00:256colors 					01:65K  						10:65k2
 5)	 0:disable com split			1:enable com split
 4)	 0:scan from COM0 to COM(n-1)	1:scan from COM(n-1) to COM0
-3)	 0:disable Left/Right swap		1:enable Left/Right swap					MH?
-2)	 0:RGB							1:GBR										RGB
+3)	 0:disable Left/Right swap		1:enable Left/Right swap
+2)	 0:RGB							1:GBR
+1)	 0:RAM col 0->95				1:RAM col 95->0
+0)	 0:Hor Address increment		1:Ver Address increment
+
+1332
+7,6) 00:256colors 					01:65K
+5)	 0:disable com split			1:enable com split
+4)	 0:scan from COM0 to COM(n-1)	1:scan from COM(n-1) to COM0
+3)	 reserved <-- Argh!
+2)	 reserved
 1)	 0:RAM col 0->95				1:RAM col 95->0
 0)	 0:Hor Address increment		1:Ver Address increment
 */

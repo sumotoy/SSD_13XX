@@ -722,7 +722,7 @@ class SSD_13XX : public Print {
 			swapVals(x1,y1);
 		}
 		writecommand_cont(CMD_DRAWLINE);
-		#if defined(_SSD_1331_96X64_H)
+		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 			writecommand_cont(x0 & 0xFF);
 			writecommand_cont(y0 & 0xFF);
 			writecommand_cont(x1 & 0xFF);
@@ -738,7 +738,7 @@ class SSD_13XX : public Print {
 	//+++++++++OK
 	void _sendColor_cont(uint8_t r,uint8_t g,uint8_t b)
 	__attribute__((always_inline)) {
-		#if defined(_SSD_1331_96X64_H)
+		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 			writecommand_cont(r);writecommand_cont(g);writecommand_cont(b);
 		#else
 			writedata8_cont(r);writedata8_cont(g);writedata8_cont(b);
@@ -750,7 +750,7 @@ class SSD_13XX : public Print {
 	__attribute__((always_inline)) {
 		uint8_t r,g,b;
 		_convertColor(color,r,g,b);
-		#if defined(_SSD_1331_96X64_H)
+		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 			writecommand_cont(r);writecommand_cont(g);writecommand_cont(b);
 		#else
 			writedata8_cont(r);writedata8_cont(g);writedata8_cont(b);

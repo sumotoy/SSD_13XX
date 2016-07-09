@@ -271,43 +271,43 @@ void SSD_13XX::begin(bool avoidSPIinit)
 	-------------------------------------------------------------*/
 
 	startTransaction();
-	#if defined(_SSD_1331_96X64_H)
-	if (SSD_COMSPLIT == 1){
-		_remapReg |= ((1 << 5));
-	} else {
-		_remapReg |= ((0 << 5));
-	}
-	writecommand_cont(CMD_DISPLAYOFF);
-	setRegister_cont(CMD_FILL,SSD_FILL);
-	setRegister_cont(CMD_STARTLINE,SSD_STARTLINE);
-	setRegister_cont(CMD_DISPLAYOFFSET,SSD_DISPLAYOFFSET);
-	//setRegister_cont(CMD_PHASEPERIOD,SSD_PHASEPERIOD);
-	setRegister_cont(CMD_SETMULTIPLEX,SSD_SETMULTIPLEX);
-	setRegister_cont(CMD_SETMASTER,SSD_SETMASTER);
-	setRegister_cont(CMD_POWERMODE,SSD_POWERMODE);
-	setRegister_cont(CMD_PRECHARGE,SSD_PRECHARGE);
-	setRegister_cont(CMD_CLOCKDIV,SSD_CLOCKDIV);
-	setRegister_cont(CMD_PRECHARGEA,SSD_PRECHARGE_A);
-	setRegister_cont(CMD_PRECHARGEB,SSD_PRECHARGE_B);
-	setRegister_cont(CMD_PRECHARGEC,SSD_PRECHARGE_C);
-	setRegister_cont(CMD_PRECHARGELEVEL,SSD_PRECHARGELEVEL);
-	setRegister_cont(CMD_VCOMH,SSD_VCOMH);
-	setRegister_cont(CMD_MASTERCURRENT,SSD_MASTERCURRENT);
-	setRegister_cont(CMD_CONTRASTA,SSD_CONTRAST_A);
-	setRegister_cont(CMD_CONTRASTB,SSD_CONTRAST_B);
-	setRegister_cont(CMD_CONTRASTC,SSD_CONTRAST_C);
-	writecommand_cont(CMD_DIMMODESET);
-	writecommand_cont(0);
+	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
+		if (SSD_COMSPLIT == 1){
+			_remapReg |= ((1 << 5));
+		} else {
+			_remapReg |= ((0 << 5));
+		}
+		writecommand_cont(CMD_DISPLAYOFF);
+		setRegister_cont(CMD_FILL,SSD_FILL);
+		setRegister_cont(CMD_STARTLINE,SSD_STARTLINE);
+		setRegister_cont(CMD_DISPLAYOFFSET,SSD_DISPLAYOFFSET);
+		//setRegister_cont(CMD_PHASEPERIOD,SSD_PHASEPERIOD);
+		setRegister_cont(CMD_SETMULTIPLEX,SSD_SETMULTIPLEX);
+		setRegister_cont(CMD_SETMASTER,SSD_SETMASTER);
+		setRegister_cont(CMD_POWERMODE,SSD_POWERMODE);
+		setRegister_cont(CMD_PRECHARGE,SSD_PRECHARGE);
+		setRegister_cont(CMD_CLOCKDIV,SSD_CLOCKDIV);
+		setRegister_cont(CMD_PRECHARGEA,SSD_PRECHARGE_A);
+		setRegister_cont(CMD_PRECHARGEB,SSD_PRECHARGE_B);
+		setRegister_cont(CMD_PRECHARGEC,SSD_PRECHARGE_C);
+		setRegister_cont(CMD_PRECHARGELEVEL,SSD_PRECHARGELEVEL);
+		setRegister_cont(CMD_VCOMH,SSD_VCOMH);
+		setRegister_cont(CMD_MASTERCURRENT,SSD_MASTERCURRENT);
+		setRegister_cont(CMD_CONTRASTA,SSD_CONTRAST_A);
+		setRegister_cont(CMD_CONTRASTB,SSD_CONTRAST_B);
+		setRegister_cont(CMD_CONTRASTC,SSD_CONTRAST_C);
+		writecommand_cont(CMD_DIMMODESET);
+		writecommand_cont(0);
 		writecommand_cont(SSD_DIMMDESET_A);
 		writecommand_cont(SSD_DIMMDESET_B);
 		writecommand_cont(SSD_DIMMDESET_C);
 		writecommand_cont(SSD_DIMMDESET_PC);
-	#if defined(SSD_GAMMASET)
-		writecommand_cont(CMD_GRAYSCALE); for (i=0;i<32;i++){writecommand_cont(SSD_GRAYTABLE[i]);}
-	#endif
-	//now clear display memory
-	setAddrWindow_cont(0,0,SSD_WIDTH-1,SSD_HEIGHT-1,false);
-	_pushColors_cont(_defaultBgColor,SSD_WIDTH);//_defaultBgColor
+		#if defined(SSD_GAMMASET)
+			writecommand_cont(CMD_GRAYSCALE); for (i=0;i<32;i++){writecommand_cont(SSD_GRAYTABLE[i]);}
+		#endif
+		//now clear display memory
+		setAddrWindow_cont(0,0,SSD_WIDTH-1,SSD_HEIGHT-1,false);
+		//_pushColors_cont(_defaultBgColor,SSD_WIDTH);//not needed?
 	#elif defined(_SSD_1351_96X64_H) || defined(_SSD_1351_128X96_H) || defined(_SSD_1351_128X128_H)
 		setRegister_cont(CMD_COMMANDLOCK,SSD_COMMANDLOCK1);
 		setRegister_cont(CMD_COMMANDLOCK,SSD_COMMANDLOCK2);
@@ -331,7 +331,7 @@ void SSD_13XX::begin(bool avoidSPIinit)
 	#endif
 	//Normal Display and turn ON
 	writecommand_cont(CMD_NORMALDISPLAY);
-	_fillUtility(true);
+	//_fillUtility(true);
 	writecommand_last(CMD_DISPLAYON);
 	endTransaction();
 	delay(60);
@@ -350,7 +350,7 @@ void SSD_13XX::begin(bool avoidSPIinit)
 void SSD_13XX::setRegister_cont(const uint8_t cmd,uint8_t data)
 {
 	writecommand_cont(cmd);
-	#if defined(_SSD_1331_96X64_H)
+	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 		writecommand_cont(data);
 	#else
 		writedata8_cont(data);
@@ -424,7 +424,7 @@ void SSD_13XX::changeMode(const enum SSD_13XX_modes m)
 			*/
 			case PWRSAVE: //power mode ON
 				writecommand_cont(CMD_POWERMODE);
-				#if defined(_SSD_1331_96X64_H)
+				#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 					writecommand_last(0x1A);
 				#else
 					writedata8_last(0x1A);
@@ -500,7 +500,7 @@ void SSD_13XX::copyArea(int16_t sx0, int16_t sy0, int16_t sx1, int16_t sy1,int16
 	}
 	startTransaction();
 	writecommand_cont(CMD_DRAWCOPY);
-	#if defined(_SSD_1331_96X64_H)
+	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 		writecommand_cont(sx0 & 0xFF);
 		writecommand_cont(sy0 & 0xFF);
 		writecommand_cont(sx1 & 0xFF);
@@ -526,7 +526,7 @@ void SSD_13XX::dimArea(int16_t x0, int16_t y0, int16_t x1, int16_t y1)
 	}
 	startTransaction();
 	writecommand_cont(CMD_DIMWINDOW);
-	#if defined(_SSD_1331_96X64_H)
+	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 		writecommand_cont(x0 & 0xFF);
 		writecommand_cont(y0 & 0xFF);
 		writecommand_cont(x1 & 0xFF);
@@ -548,7 +548,7 @@ void SSD_13XX::clearArea(int16_t x0, int16_t y0, int16_t x1, int16_t y1)
 	}
 	startTransaction();
 	writecommand_cont(CMD_CLRWINDOW);
-	#if defined(_SSD_1331_96X64_H)
+	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 		writecommand_cont(x0 & 0xFF);
 		writecommand_cont(y0 & 0xFF);
 		writecommand_cont(x1 & 0xFF);
@@ -580,7 +580,9 @@ void SSD_13XX::setColorDepth(uint8_t depth)
 
 void SSD_13XX::setColorOrder(bool order)
 {
+	#if defined(_SSD_1331_REG_H_)
 	_remapReg |= ((order << 2));
+	#endif
 }
 
 //+++++++++OK
@@ -662,7 +664,7 @@ void SSD_13XX::defineScrollArea(int16_t a, int16_t b, int16_t c, int16_t d, uint
 	}
 	startTransaction();
 	writecommand_cont(CMD_SCROLL_SET);
-	#if defined(_SSD_1331_96X64_H)
+	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 		writecommand_cont(a & 0xFF);
 		writecommand_cont(b & 0xFF);
 		writecommand_cont(c & 0xFF);
@@ -820,7 +822,7 @@ void SSD_13XX::fillScreen(uint16_t color)
 	startTransaction();
 	_fillUtility(1);
 	writecommand_cont(CMD_DRAWRECT);
-	#if defined(_SSD_1331_96X64_H)
+	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 		writecommand16_cont(0);
 		writecommand_cont(SSD_WIDTH-1);
 		writecommand_cont(SSD_HEIGHT-1);
@@ -849,7 +851,7 @@ void SSD_13XX::fillScreen(uint16_t color1,uint16_t color2)
 		_convertColor(color1,r1,g1,b1);
 		_fillUtility(1);
 		writecommand_cont(CMD_DRAWRECT);
-		#if defined(_SSD_1331_96X64_H)
+		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 			writecommand16_cont(0);
 			writecommand_cont(SSD_WIDTH-1);
 			writecommand_cont(SSD_HEIGHT-1);
@@ -2633,7 +2635,7 @@ fix this but is the only 'fast way' I found to acieve this!
 		}
 		if (x1 > _width || y1 > _height) return;
 		writecommand_cont(CMD_DRAWLINE);
-		#if defined(_SSD_1331_96X64_H)
+		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 			writecommand_cont(x0 & 0xFF);
 			writecommand_cont(y0 & 0xFF);
 			writecommand_cont(x1 & 0xFF);
@@ -2649,7 +2651,7 @@ fix this but is the only 'fast way' I found to acieve this!
 	//+++++++++OK
 	void SSD_13XX::_sendColor_cont(uint8_t r,uint8_t g,uint8_t b)
 	{
-		#if defined(_SSD_1331_96X64_H)
+		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 			writecommand_cont(r);writecommand_cont(g);writecommand_cont(b);
 		#else
 			writedata8_cont(r);writedata8_cont(g);writedata8_cont(b);
@@ -2661,7 +2663,7 @@ fix this but is the only 'fast way' I found to acieve this!
 	{
 		uint8_t r,g,b;
 		_convertColor(color,r,g,b);
-		#if defined(_SSD_1331_96X64_H)
+		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 			writecommand_cont(r);writecommand_cont(g);writecommand_cont(b);
 		#else
 			writedata8_cont(r);writedata8_cont(g);writedata8_cont(b);
@@ -2676,7 +2678,7 @@ fix this but is the only 'fast way' I found to acieve this!
 		if (filling != _filled){
 			_filled = filling;
 			writecommand_cont(CMD_FILL);
-		#if defined(_SSD_1331_96X64_H)
+		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 			if (_filled){
 				writecommand_cont(0x01);
 			} else {
@@ -2715,7 +2717,7 @@ fix this but is the only 'fast way' I found to acieve this!
 		}
 		_fillUtility(filled);
 		writecommand_cont(CMD_DRAWRECT);
-		#if defined(_SSD_1331_96X64_H)
+		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 			writecommand_cont(x & 0xFF);
 			writecommand_cont(y & 0xFF);
 			if ((x + w - 1) >= SSD_WIDTH) {
@@ -2754,7 +2756,7 @@ fix this but is the only 'fast way' I found to acieve this!
 			swapVals(x0, y0);
 			swapVals(x1, y1);
 		}
-		#if defined(_SSD_1331_96X64_H)
+		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 			writecommand_cont(CMD_SETCOLUMN); //Column
 			writecommand_cont(x0); writecommand_cont(x1);
 			writecommand_cont(CMD_SETROW); //Page
