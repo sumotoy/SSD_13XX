@@ -13,13 +13,20 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 ***
 
 <b>SSD1331</b> Currently my preferred one for the SSD1331...<br>  
-![SSD1331](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1331.png)<br>
+Uncomment in settings file: <code>#include "../_display/SSD_1331_96x64.h"</code>
+![SSD1331](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1331.png)
+***
 <b>SSD1331 RED PCB 0.96" Color Oled</b><br>  
+Uncomment in settings file: <code>#include "../_display/SSD_1331_REDPCB.h"</code>
 ![SSD1331b](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1331b.png)<br>
-This Oled needs special connections so please do not use until I write a wiki for it!<br>
+This Oled needs special connections so please do not use until I write a wiki for it!
+***
 <b>SSD1332</b><br>  
 ![SSD1332](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1332.png)<br>
-Note: for this display you need to set it for SPI and connect all pin from D2 to D7 to ground<br>
+Uncomment in settings file: <code>#include "../_display/SSD_1332_96x64.h"</code>
+Note: for this display you need to set it for SPI and connect all pin from D2 to D7 to ground
+***
+
 <b>How to set driver:</b><br>  
 You need to open _settings/SSD_13XX_settings.h with a text editor and uncomment the driver you want to use:<br>
 Es. <code>#include "../_display/SSD_1331_96x64.h"</code>
