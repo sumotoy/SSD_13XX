@@ -5,15 +5,10 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 <b>Current Version:</b><br>
  - 1.0r1: SSD1331/SSD1332 tested only with various Teensy's. If not work with other CPU please report only, I NEVER tested the code with other CPU's so I expect this, but remember that is a preview and things gonna change soon.
 
-<b>Driver supported so far:</b><br>
-  - <b>SSD_1331</b>: (has hardware accelleration primitives) (done)
-  - <b>SSD_1332</b>: (has hardware accelleration primitives) (done but need some tuning)
-  - SSD_1351: (has hardware accelleration primitives) (1.27") (1.5") (to do)<br>
-
 <b>Driver description (what I should choose?):</b><br>
-* <b>SSD1331</b> is a full featured driver for 96x64 oled with a lot of useful registers and an hardware accellerated standalone scroll that I never seen in other drivers.<br>
-* <b>SSD1332</b> is the 'low cost' version of SSD1331, much less features, less fast, no scrolling.<br>
-* <b>SSD1351</b> (todo)<br>
+* <b>SSD1331</b> is a full featured driver for 96x64 oled with a lot of useful registers and an hardware accellerated standalone scroll that I never seen in other drivers. This driver is currently supported.<br>
+* <b>SSD1332</b> is the 'low cost' version of SSD1331, much less features, less fast, no scrolling. This driver is currently supported.<br>
+* <b>SSD1351</b> (in development)<br>
   
 
 <b>How to set driver:</b><br>  
