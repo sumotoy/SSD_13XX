@@ -800,7 +800,7 @@ class SSD_13XX : public Print {
 		void 		drawPixel_cont(int16_t x, int16_t y, uint16_t color);
 		void 		_sendLineData_cont(int16_t x0,int16_t y0,int16_t x1,int16_t y1);
 		void 		drawHardLine_cont(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color/*,int dly=CMD_DLY_LINE*/);
-		void 		_fillUtility(bool filling);
+		//void 		_fillUtility(bool filling);
 
 	#endif
 
