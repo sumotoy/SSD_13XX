@@ -64,11 +64,11 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - defineScrollArea: since scroll is hardware, all is defined inside this function)
  - clearArea:
  - setColorDepth:8 or 16bit
- - setColorOrder:RGB or BGR
+ - setColorOrder:RGB or BGR (only SSD1331)
  - drawRect: the standard drawRect is provided, but this advanced version have borders. Hardware accellerated.
  - mode:PWRSAVE It's almost equal to sleep, display goes off
- - mode:DISP_DIM The display goes in Dim mode
- - mode:PROTECT The chip logic don't accept any commands, just mode:NORMAL to goes off of protect mode.<br>
+ - mode:DISP_DIM The display goes in Dim mode (only SSD1331)
+ - mode:PROTECT The chip logic don't accept any commands, just mode:NORMAL to goes off of protect mode.(only SSD1331)<br>
 <b>Performances (SSD1331):</b><br>
 Early alpha wasnot working, only garbage on screen, it's here for reference<br>
 Alpha 1..2 was using absolute screen addressing (now abandoned)<br>
