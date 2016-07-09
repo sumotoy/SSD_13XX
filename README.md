@@ -10,10 +10,10 @@ I have other 2 libraries here in github but have some issues and are quite old, 
   - <b>SSD_1332</b>: (has hardware accelleration primitives) (done but need some tuning)
   - SSD_1351: (has hardware accelleration primitives) (1.27") (1.5") (to do)<br>
 
-<b>Driver description:</b><br>
-<b>SSD1331</b> is a full featured driver for 96x64 oled with a lot of useful registers and an hardware accellerated standalone scroll that it's really rare.<br>
-<b>SSD1332</b> is the 'low cost' version of SSD1331, less features, less fast, no scrolling.<br>
-<b>SSD1351</b> (todo)<br>
+<b>Driver description (what I should choose?):</b><br>
+* <b>SSD1331</b> is a full featured driver for 96x64 oled with a lot of useful registers and an hardware accellerated standalone scroll that I never seen in other drivers.<br>
+* <b>SSD1332</b> is the 'low cost' version of SSD1331, much less features, less fast, no scrolling.<br>
+* <b>SSD1351</b> (todo)<br>
   
 
 <b>How to set driver:</b><br>  
