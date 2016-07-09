@@ -96,9 +96,6 @@ Times are in Microseconds!<br>
 	
 More or less, Beta 2 it's the release candidate, you can note how amazing fast in some operation, for example 406 microsec for a complete screen erase, 277 microsecs for the complete line test or the 183 microsec for the triangle test (remember that triangulation is used for 3d rendering as well, it should be fast), even text it's really fast. In comparison, for the Adafruit one I have to use milliseconds, it's amazing slow (even using the fast SPI mode). I will up a table comparison (for fun) whe I release out this one.
 
-<b>Shit goes on:</b><br>
-After SSD1331 I'm currently on SSD1332, I was suppose it's very easy but as always not! Did you think SSD1332 it's better than SSD1331? NO! The SSD1331 it's faster, better colors (the RED on SSD1332 is always orange, no matter settings!) and also cheaper. I Got the SSD1332 working but color still looks weird to me.<br>
-
 <b>Licence:</b><br>
 Licenced under GNU V3.
  
