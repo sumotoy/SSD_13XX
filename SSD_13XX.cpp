@@ -108,7 +108,9 @@
 void SSD_13XX::begin(bool avoidSPIinit)
 {
 //initialize Vars
+#if defined(SSD_GAMMASET)
 	uint8_t i;
+#endif
 	_remapReg		= 0;
 	_currentMode	= 0b00000000;
 	_portrait 		= false;
@@ -278,7 +280,7 @@ void SSD_13XX::begin(bool avoidSPIinit)
 			_remapReg |= ((0 << 5));
 		}
 		writecommand_cont(CMD_DISPLAYOFF);
-		setRegister_cont(CMD_FILL,SSD_FILL);
+		_fillUtility(1);
 		setRegister_cont(CMD_STARTLINE,SSD_STARTLINE);
 		setRegister_cont(CMD_DISPLAYOFFSET,SSD_DISPLAYOFFSET);
 		//setRegister_cont(CMD_PHASEPERIOD,SSD_PHASEPERIOD);
@@ -627,7 +629,7 @@ void SSD_13XX::setRotation(uint8_t m)
 		#if defined(_SSD_1331_96X64_H)
 			_remapReg |= ((1 << 1) | (1 << 0));//bit 1 & 0
 		#elif defined(_SSD_1332_96X64_H)
-			_remapReg |= ((1 << 0));//bit 0 
+			_remapReg |= ((1 << 0));//bit 0
 		#else
 			_remapReg |= ((1 << 1) | (1 << 0));//bit 1 & 0
 			//TODO
@@ -1906,7 +1908,7 @@ void SSD_13XX::drawImage(int16_t x, int16_t y,const tPicture *img,const enum SSD
 		swapVals(x,y);
 		swapVals(iWidth,iHeight);
 	}
-	
+
 	if (x + iWidth >= _width || y + iHeight >= _height) return;//cannot be
 
 	startTransaction();
@@ -2819,7 +2821,7 @@ fix this but is the only 'fast way' I found to acieve this!
 		g =	(uint8_t)((color >> 5) & 0x3F);
 		b = (uint8_t)((color << 1) & 0x3F);
 	}
-	
+
 	/*
 	void SSD_13XX::_convertColor(uint16_t color,uint8_t &r,uint8_t &g,uint8_t &b)
 	{

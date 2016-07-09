@@ -30,7 +30,7 @@
 	static const int16_t	SSD_HEIGHT 	=	64;
 	
 	/* Gamma Set*/
-	#define SSD_GAMMASET
+	//#define SSD_GAMMASET
 
 	static const int16_t	SSD_COMSPLIT 			=	1;			//this unit needs com split
 	static const uint8_t	SSD_COLORDEPTH  		= 	16;			//8 or 16
@@ -39,20 +39,19 @@
 	static const uint8_t	SSD_PHASEPERIOD			=	0b10110001;
 	static const uint8_t	SSD_SETMULTIPLEX		=	0x3F;
 	static const uint8_t	SSD_STARTLINE			=	0x00;
-	static const uint8_t	SSD_FILL				=	0x01;
 	static const uint8_t	SSD_SETMASTER			=	0x8E;
-	static const uint8_t	SSD_POWERMODE			=	0b00001011;//0x0B;
-	static const uint8_t	SSD_PRECHARGE			=	0x1F;//0x31;
-	static const uint8_t	SSD_CLOCKDIV			=	0xF0;
-	static const uint8_t	SSD_PRECHARGE_A			=	0x64;
-	static const uint8_t	SSD_PRECHARGE_B			=	0x78;
-	static const uint8_t	SSD_PRECHARGE_C			=	0x64;
+	static const uint8_t	SSD_POWERMODE			=	0x0B;//0x0B;//0b00001011
+	static const uint8_t	SSD_PRECHARGE			=	0x31;//0x31//0x1F;
+	static const uint8_t	SSD_CLOCKDIV			=	0xF0;//F0
+	static const uint8_t	SSD_PRECHARGE_A			=	0x64;//64
+	static const uint8_t	SSD_PRECHARGE_B			=	0x64;//78
+	static const uint8_t	SSD_PRECHARGE_C			=	0x64;//64
 	static const uint8_t	SSD_PRECHARGELEVEL		=	0x3A;
 	static const uint8_t	SSD_VCOMH				=	0x3E;
-	static const uint8_t	SSD_MASTERCURRENT		=	0x0F;//0x06;
-	static const uint8_t	SSD_CONTRAST_A			=	0x91;
-	static const uint8_t	SSD_CONTRAST_B			=	0x50;
-	static const uint8_t	SSD_CONTRAST_C			=	0x7D;
+	static const uint8_t	SSD_MASTERCURRENT		=	0x0F;//0x06//0x0F;
+	static const uint8_t	SSD_CONTRAST_A			=	0x91;//91
+	static const uint8_t	SSD_CONTRAST_B			=	0x50;//50
+	static const uint8_t	SSD_CONTRAST_C			=	0x7D;//7D
 	static const uint8_t	SSD_DIMMDESET_A			=	128;
 	static const uint8_t	SSD_DIMMDESET_B			=	128;
 	static const uint8_t	SSD_DIMMDESET_C			=	128;
