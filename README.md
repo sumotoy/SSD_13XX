@@ -6,7 +6,7 @@ I have other 2 libraries here in github but have some issues and are quite old, 
  - 1.0r1: SSD1331 tested only with various Teensy's. If not work with other CPU please report only, I NEVER tested the code with other CPU's so I expect this, but remember that is a preview and things gonna change soon.
 
 <b>Driver supported so far:</b><br>
-  - SSD_1331: (has hardware accelleration primitives) (done)
+  - <b>SSD_1331</b>: (has hardware accelleration primitives) (done)
   - SSD_1332: (has hardware accelleration primitives) (currently in development)
   - SSD_1351: (has hardware accelleration primitives) (1.27") (1.5") (to do)<br>
 
