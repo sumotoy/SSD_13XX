@@ -69,14 +69,14 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - Uses TFT_ILI9163C command format that have many features and covers commands used in many libraries so it will be easy convert code to work with this one.<br>
 
 <b>SSD1331/32 Unique commands: (differs from other libraries due different chip features)</b><br>
- - copyArea: copy a portion of screen into another location (hardware acc)
- - dimArea: dim a selected area
- - scroll: this chip has an standalone hardware scroll
+ - copyArea: copy a portion of screen into another location (hardware acc.)
+ - dimArea: dim a selected area (only SSD1331)
+ - scroll: this chip has an standalone hardware scroll (only SSD1331)
  - defineScrollArea: since scroll is hardware, all is defined inside this function)
- - clearArea:
+ - moveArea: It move a defined area into another place (hardware acc.)
  - setColorDepth:8 or 16bit
  - setColorOrder:RGB or BGR (only SSD1331)
- - drawRect: the standard drawRect is provided, but this advanced version have borders. Hardware accellerated.
+ - drawRect: the standard drawRect is provided, but this advanced version have borders. (hardware acc.)
  - mode:PWRSAVE It's almost equal to sleep, display goes off
  - mode:DISP_DIM The display goes in Dim mode (only SSD1331)
  - mode:PROTECT The chip logic don't accept any commands, just mode:NORMAL to goes off of protect mode.(only SSD1331)<br>
