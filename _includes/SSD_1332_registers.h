@@ -54,6 +54,7 @@ static const uint8_t CMD_GRAYSCALE 			= 0xB8;//SSD1332
 static const uint8_t CMD_PRECHARGEA 		= 0x8A;//SSD1332
 static const uint8_t CMD_PRECHARGEB			= 0x8B;//SSD1332
 static const uint8_t CMD_PRECHARGEC 		= 0x8C;//SSD1332
+static const uint8_t CMD_LINEARGRAY 		= 0xB9;//SSD1332
 static const uint8_t CMD_PRECHARGELEVEL 	= 0xBB;//SSD1332
 static const uint8_t CMD_VCOMH 				= 0xBE;//SSD1332
 static const uint8_t CMD_VPACOLORLVL 		= 0xBB;//SSD1332

@@ -306,6 +306,8 @@ void SSD_13XX::begin(bool avoidSPIinit)
 		writecommand_cont(SSD_DIMMDESET_PC);
 		#if defined(SSD_GAMMASET)
 			writecommand_cont(CMD_GRAYSCALE); for (i=0;i<32;i++){writecommand_cont(SSD_GRAYTABLE[i]);}
+		#else
+			writecommand_cont(CMD_LINEARGRAY);
 		#endif
 		//now clear display memory
 		setAddrWindow_cont(0,0,SSD_WIDTH-1,SSD_HEIGHT-1,false);

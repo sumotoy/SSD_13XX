@@ -23,7 +23,7 @@
 static const uint8_t CMD_NOP     			= 0xE3;//SSD1332
 static const int	 CMD_DLY_LINE			= 200;//SSD1351 400
 static const int	 CMD_DLY_FILL			= 400;//SSD1351 800
-static const int	 CMD_DLY_MIN			= 4;
+static const int	 CMD_DLY_MIN			= 4;//this is the min delay (nicrosec) for this device
 static const uint8_t CMD_DRAWLINE 			= 0x21;//SSD1332
 static const uint8_t CMD_DRAWRECT 			= 0x22;//SSD1332
 static const uint8_t CMD_DRAWCOPY 			= 0x23;//SSD1332
@@ -54,6 +54,7 @@ static const uint8_t CMD_GRAYSCALE 			= 0xB8;//SSD1332
 static const uint8_t CMD_PRECHARGEA 		= 0x8A;//SSD1332
 static const uint8_t CMD_PRECHARGEB			= 0x8B;//SSD1332
 static const uint8_t CMD_PRECHARGEC 		= 0x8C;//SSD1332
+static const uint8_t CMD_LINEARGRAY 		= 0xB9;//SSD1332
 static const uint8_t CMD_PRECHARGELEVEL 	= 0xBB;//SSD1332
 static const uint8_t CMD_VCOMH 				= 0xBE;//SSD1332
 static const uint8_t CMD_VPACOLORLVL 		= 0xBB;//SSD1332
