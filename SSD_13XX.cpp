@@ -271,7 +271,7 @@ void SSD_13XX::begin(bool avoidSPIinit)
 	/* -----------------------------------------------------------
 	------------------- Chip Initialization ----------------------
 	-------------------------------------------------------------*/
-
+	delay(30);
 	startTransaction();
 	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 		if (SSD_COMSPLIT == 1){
@@ -280,14 +280,13 @@ void SSD_13XX::begin(bool avoidSPIinit)
 			_remapReg |= ((0 << 5));
 		}
 		writecommand_cont(CMD_DISPLAYOFF);
-		_fillUtility(1);
+		
 		setRegister_cont(CMD_STARTLINE,SSD_STARTLINE);
 		setRegister_cont(CMD_DISPLAYOFFSET,SSD_DISPLAYOFFSET);
-		//setRegister_cont(CMD_PHASEPERIOD,SSD_PHASEPERIOD);
+		setRegister_cont(CMD_PHASEPERIOD,SSD_PHASEPERIOD);
 		setRegister_cont(CMD_SETMULTIPLEX,SSD_SETMULTIPLEX);
 		setRegister_cont(CMD_SETMASTER,SSD_SETMASTER);
 		setRegister_cont(CMD_POWERMODE,SSD_POWERMODE);
-		
 		setRegister_cont(CMD_CLOCKDIV,SSD_CLOCKDIV);
 		#if defined(_SSD_1331_96X64_H)
 			setRegister_cont(CMD_PRECHARGE,SSD_PRECHARGE);
@@ -310,6 +309,7 @@ void SSD_13XX::begin(bool avoidSPIinit)
 		setRegister_cont(CMD_VPACOLORLVL,SSD_VPACOLORLVL);
 		setRegister_cont(CMD_VPBCOLORLVL,SSD_VPBCOLORLVL);
 		setRegister_cont(CMD_VPCCOLORLVL,SSD_VPCCOLORLVL);
+		_fillUtility(1);
 		#if defined(SSD_GAMMASET)
 			writecommand_cont(CMD_GRAYSCALE); for (i=0;i<32;i++){writecommand_cont(SSD_GRAYTABLE[i]);}
 		#else
