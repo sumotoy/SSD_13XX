@@ -7,8 +7,8 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 
 <b>Driver description (what I should choose?):</b><br>
 * <b>SSD1331</b> is a full featured driver for 96x64 oled with a lot of useful registers and an hardware accellerated standalone scroll that I never seen in other drivers. This driver is currently supported.<br>
-* <b>SSD1332</b> is the 'low cost' version of SSD1331, much less features, less fast, no scrolling. This driver is currently supported.<br>
-* <b>SSD1351</b> (in development)<br>
+* <b>SSD1332</b> is the 'low cost' version of SSD1331, much less features, less fast (but use some Hardware Accellerated primitives), no scrolling. This driver is currently supported.<br>
+* <b>SSD1351</b> Can drive 128x128 Oled's, doesn't have any Hardware Accellerated primitive, pretty featured. (in development)<br>
 
 ***
 
@@ -57,6 +57,7 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - Standard SPI & SPI transaction compatible, play nice with other SPI devices.
  - Many CPU supported.
  - Ultrafast Teensy's 3.0,3.1,3.2,3.4,3.5 SPI FIFO.
+ - Fully SPI Transaction (where applicable), play nice with other SPI devices.
  - Almost all chip features supported.
  - LGPO Font accellerated rendering.
  - Icon support.
