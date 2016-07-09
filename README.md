@@ -10,6 +10,10 @@ I have other 2 libraries here in github but have some issues and are quite old, 
   - <b>SSD_1332</b>: (has hardware accelleration primitives) (done but need some tuning)
   - SSD_1351: (has hardware accelleration primitives) (1.27") (1.5") (to do)<br>
 
+<b>How to set driver:</b><br>  
+You need to open _settings/SSD_13XX_settings.h with a text editor and uncomment the driver you want to use:<br>
+Es. <code>#include "../_display/SSD_1331_96x64.h"</code>
+
 <b>Driver that will never supported:</b><br>
  - SSD_1306: This device need a completely different library since it have no internal framebuffer.<br>
 
