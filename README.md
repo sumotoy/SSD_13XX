@@ -12,7 +12,7 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 
 ***
 
-<b>SSD1331</b><br>  
+<b>SSD1331</b> Currently my preferred one for the SSD1331...<br>  
 ![SSD1331](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1331.png)<br>
 <b>SSD1331 RED PCB 0.96" Color Oled</b><br>  
 ![SSD1331b](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1331b.png)<br>
