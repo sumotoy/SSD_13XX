@@ -166,7 +166,11 @@ unsigned long testText() {
   tft.println("Hello World!");
   tft.setTextColor(YELLOW);
   tft.setTextScale(2);
+  #if defined(_LEGACYSPEEDTEST)
   tft.println(1234.56);
+  #else
+  tft.println(1234.5);
+  #endif
   tft.setTextColor(RED);
   #if defined(_LEGACYSPEEDTEST)
   tft.setTextScale(3);
