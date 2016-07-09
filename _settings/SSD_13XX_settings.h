@@ -29,6 +29,7 @@ Default: #include "../_display/SSD_1331_96x64.h"
 (uncomment just one below...)
 ----------------------------------------------------------------------------------*/
 	#include "../_display/SSD_1331_96x64.h"
+	//#include "../_display/SSD_1332_96x64.h"
 /*--------------------------------------------------------------------------------
 - Size Reducing (decrease slight performances) -
 Ignored for Teensy 3.x, DUE

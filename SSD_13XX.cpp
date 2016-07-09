@@ -592,19 +592,46 @@ void SSD_13XX::setRotation(uint8_t m)
 	_portrait = false;
 	_remapReg &= ~(0x1B);//clear bit 0,1,3,4
 	if (_rotation == 0){
-		_remapReg |= ((1 << 4) | (1 << 1));//bit 4 & 1
+		#if defined(_SSD_1331_96X64_H)
+			_remapReg |= ((1 << 4) | (1 << 1));//bit 4 & 1
+		#elif defined(_SSD_1332_96X64_H)
+			_remapReg |= ((1 << 4));//bit 4
+		#else
+			//TODO
+			_remapReg |= ((1 << 4) | (1 << 1));//bit 4 & 1
+		#endif
 		_width  = SSD_WIDTH;
 		_height = SSD_HEIGHT;
 	} else if (_rotation == 1){
-		_remapReg |= ((1 << 4) | (1 << 0));//bit 4 & 0
+		#if defined(_SSD_1331_96X64_H)
+			_remapReg |= ((1 << 4) | (1 << 0));//bit 4 & 0
+		#elif defined(_SSD_1332_96X64_H)
+			_remapReg |= ((1 << 4) | (1 << 1) | (1 << 0));//bit 4 & 1 & 0
+		#else
+			//TODO
+			_remapReg |= ((1 << 4) | (1 << 0));//bit 4 & 0
+		#endif
 		_width  = SSD_HEIGHT;
 		_height = SSD_WIDTH;
 		_portrait = true;
 	} else if (_rotation == 2){
+		#if defined(_SSD_1331_96X64_H)
+		#elif defined(_SSD_1332_96X64_H)
+			_remapReg |= ((1 << 1));//bit 1
+		#else
+			//TODO
+		#endif
 		_width  = SSD_WIDTH;
 		_height = SSD_HEIGHT;
 	} else {
-		_remapReg |= ((1 << 1) | (1 << 0));//bit 1 & 0
+		#if defined(_SSD_1331_96X64_H)
+			_remapReg |= ((1 << 1) | (1 << 0));//bit 1 & 0
+		#elif defined(_SSD_1332_96X64_H)
+			_remapReg |= ((1 << 0));//bit 0 
+		#else
+			_remapReg |= ((1 << 1) | (1 << 0));//bit 1 & 0
+			//TODO
+		#endif
 		_width  = SSD_HEIGHT;
 		_height = SSD_WIDTH;
 		_portrait = true;
@@ -1785,8 +1812,8 @@ void SSD_13XX::pushColor(uint16_t color)
 
 int SSD_13XX::_dlyHelper(int16_t w,int16_t h,int maxDly)//in microseconds
 {
-	if (w <= 0 || h <= 0) return 4;
-	return map(w*h,10,SSD_CGRAM,4,maxDly);
+	if (w <= 0 || h <= 0) return CMD_DLY_MIN;
+	return map(w*h,2,SSD_CGRAM,CMD_DLY_MIN,maxDly);
 }
 
 void SSD_13XX::drawIcon(int16_t x, int16_t y,const tIcon *icon,uint8_t scale,uint16_t f,uint16_t b,bool inverse)
