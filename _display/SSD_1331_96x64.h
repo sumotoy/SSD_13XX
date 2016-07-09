@@ -39,7 +39,6 @@
 	static const uint8_t	SSD_PHASEPERIOD			=	0b10110001;
 	static const uint8_t	SSD_SETMULTIPLEX		=	0x3F;
 	static const uint8_t	SSD_STARTLINE			=	0x00;
-	static const uint8_t	SSD_FILL				=	0x01;
 	static const uint8_t	SSD_SETMASTER			=	0x8E;
 	static const uint8_t	SSD_POWERMODE			=	0x0B;
 	static const uint8_t	SSD_PRECHARGE			=	0x31;
@@ -53,10 +52,15 @@
 	static const uint8_t	SSD_CONTRAST_A			=	0x91;
 	static const uint8_t	SSD_CONTRAST_B			=	0x50;
 	static const uint8_t	SSD_CONTRAST_C			=	0x7D;
+	static const uint8_t	SSD_VPACOLORLVL			=	0b00111111;
+	static const uint8_t	SSD_VPBCOLORLVL			=	0b00111111;
+	static const uint8_t	SSD_VPCCOLORLVL			=	0b00111111;
 	static const uint8_t	SSD_DIMMDESET_A			=	128;
 	static const uint8_t	SSD_DIMMDESET_B			=	128;
 	static const uint8_t	SSD_DIMMDESET_C			=	128;
 	static const uint8_t	SSD_DIMMDESET_PC		=	0x0F;//max 0x1F
 
+	#if defined(SSD_GAMMASET)
 	static const uint8_t 	SSD_GRAYTABLE[32]= 	{0x01,0x03,0x05,0x07,0x0A,0x0D,0x10,0x13,0x16,0x19,0x1C,0x20,0x24,0x28,0x2C,0x30,0x34,0x38,0x3C,0x40,0x44,0x48,0x4C,0x50,0x54,0x58,0x5C,0x60,0x64,0x68,0x6C,0x70};
+	#endif
 #endif

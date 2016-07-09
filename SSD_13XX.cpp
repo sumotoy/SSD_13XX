@@ -287,23 +287,29 @@ void SSD_13XX::begin(bool avoidSPIinit)
 		setRegister_cont(CMD_SETMULTIPLEX,SSD_SETMULTIPLEX);
 		setRegister_cont(CMD_SETMASTER,SSD_SETMASTER);
 		setRegister_cont(CMD_POWERMODE,SSD_POWERMODE);
-		setRegister_cont(CMD_PRECHARGE,SSD_PRECHARGE);
+		
 		setRegister_cont(CMD_CLOCKDIV,SSD_CLOCKDIV);
-		setRegister_cont(CMD_PRECHARGEA,SSD_PRECHARGE_A);
-		setRegister_cont(CMD_PRECHARGEB,SSD_PRECHARGE_B);
-		setRegister_cont(CMD_PRECHARGEC,SSD_PRECHARGE_C);
-		setRegister_cont(CMD_PRECHARGELEVEL,SSD_PRECHARGELEVEL);
+		#if defined(_SSD_1331_96X64_H)
+			setRegister_cont(CMD_PRECHARGE,SSD_PRECHARGE);
+			setRegister_cont(CMD_PRECHARGEA,SSD_PRECHARGE_A);
+			setRegister_cont(CMD_PRECHARGEB,SSD_PRECHARGE_B);
+			setRegister_cont(CMD_PRECHARGEC,SSD_PRECHARGE_C);
+			setRegister_cont(CMD_PRECHARGELEVEL,SSD_PRECHARGELEVEL);
+			writecommand_cont(CMD_DIMMODESET);
+			writecommand_cont(0);
+			writecommand_cont(SSD_DIMMDESET_A);
+			writecommand_cont(SSD_DIMMDESET_B);
+			writecommand_cont(SSD_DIMMDESET_C);
+			writecommand_cont(SSD_DIMMDESET_PC);
+		#endif
 		setRegister_cont(CMD_VCOMH,SSD_VCOMH);
 		setRegister_cont(CMD_MASTERCURRENT,SSD_MASTERCURRENT);
 		setRegister_cont(CMD_CONTRASTA,SSD_CONTRAST_A);
 		setRegister_cont(CMD_CONTRASTB,SSD_CONTRAST_B);
 		setRegister_cont(CMD_CONTRASTC,SSD_CONTRAST_C);
-		writecommand_cont(CMD_DIMMODESET);
-		writecommand_cont(0);
-		writecommand_cont(SSD_DIMMDESET_A);
-		writecommand_cont(SSD_DIMMDESET_B);
-		writecommand_cont(SSD_DIMMDESET_C);
-		writecommand_cont(SSD_DIMMDESET_PC);
+		setRegister_cont(CMD_VPACOLORLVL,SSD_VPACOLORLVL);
+		setRegister_cont(CMD_VPBCOLORLVL,SSD_VPBCOLORLVL);
+		setRegister_cont(CMD_VPCCOLORLVL,SSD_VPCCOLORLVL);
 		#if defined(SSD_GAMMASET)
 			writecommand_cont(CMD_GRAYSCALE); for (i=0;i<32;i++){writecommand_cont(SSD_GRAYTABLE[i]);}
 		#else
@@ -406,11 +412,16 @@ void SSD_13XX::changeMode(const enum SSD_13XX_modes m)
 					//delay(120);//needed
 				}
 				if (_currentMode == 4){//was inverted?
+					//SSD1332 should need only CMD_NORMALDISPLAY!?!
+					#if defined(_SSD_1331_96X64_H)
 					writecommand_cont(CMD_DINVOF);
+					#endif
 				}
+				#if defined(_SSD_1331_96X64_H)
 				if (_currentMode == 9){//was in protect mode?
 					setRegister_cont(CMD_CMDLOCK,0x12);//unlock
 				}
+				#endif
 				if (_currentMode == 12 || _currentMode == 13){//all on or off?
 					//setRegister_cont(CMD_CMDLOCK,0x12);//unlock
 				}
@@ -457,8 +468,10 @@ void SSD_13XX::changeMode(const enum SSD_13XX_modes m)
 				_currentMode = 7;
 			break;
 			case PROTECT:
+				#if defined(_SSD_1331_96X64_H)
 				setRegister_cont(CMD_CMDLOCK,0x16);//lock
 				_currentMode = 9;
+				#endif
 			break;
 			default:
 				closeTransaction();
