@@ -9,8 +9,11 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 * <b>SSD1331</b> is a full featured driver for 96x64 oled with a lot of useful registers and an hardware accellerated standalone scroll that I never seen in other drivers. This driver is currently supported.<br>
 * <b>SSD1332</b> is the 'low cost' version of SSD1331, much less features, less fast, no scrolling. This driver is currently supported.<br>
 * <b>SSD1351</b> (in development)<br>
-  
-
+<b>SSD1331</b><br>  
+![SSD1331](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1331.png)<br>
+<b>SSD1332</b><br>  
+![SSD1332](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1332.png)<br>
+Note: for this display you need to set it for SPI and connect all pin from D2 to D7 to ground<br>
 <b>How to set driver:</b><br>  
 You need to open _settings/SSD_13XX_settings.h with a text editor and uncomment the driver you want to use:<br>
 Es. <code>#include "../_display/SSD_1331_96x64.h"</code>
