@@ -67,7 +67,7 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - User Font support (as seen in my last other libraries, use same font file format).
  - Uses TFT_ILI9163C command format that have many features and covers commands used in many libraries so it will be easy convert code to work with this one.<br>
 
-<b>SSD1331/32Unique commands: (differs from other libraries due different chip features)</b><br>
+<b>SSD1331/32 Unique commands: (differs from other libraries due different chip features)</b><br>
  - copyArea: copy a portion of screen into another location (hardware acc)
  - dimArea: dim a selected area
  - scroll: this chip has an standalone hardware scroll
