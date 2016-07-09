@@ -409,21 +409,24 @@ void SSD_13XX::changeMode(const enum SSD_13XX_modes m)
 				if (_currentMode == 9){//was in protect mode?
 					setRegister_cont(CMD_CMDLOCK,0x12);//unlock
 				}
+				if (_currentMode == 12 || _currentMode == 13){//all on or off?
+					//setRegister_cont(CMD_CMDLOCK,0x12);//unlock
+				}
 				writecommand_cont(CMD_NORMALDISPLAY);
 				_currentMode = 0;
 			break;
-			/*
-			case IDLE:
-				//writecommand_cont(CMD_IDLEON);
-				_currentMode = 2;
+			
+			case ALL_ON:
+				writecommand_cont(CMD_DISPLAYALLON);
+				_currentMode = 12;
 			break;
-			*/
-			/*
-			case SLEEP: //power mode ON
-				writecommand_cont(CMD_POWERMODE);
-				_currentMode = 3;
+			
+			
+			case ALL_OFF: 
+				writecommand_cont(CMD_DISPLAYALLOFF);
+				_currentMode = 13;
 			break;
-			*/
+			
 			case PWRSAVE: //power mode ON
 				writecommand_cont(CMD_POWERMODE);
 				#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
