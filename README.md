@@ -22,8 +22,8 @@ Uncomment in settings file: <code>#include "../_display/SSD_1331_REDPCB.h"</code
 This Oled needs special connections so please do not use until I write a wiki for it!
 ***
 <b>SSD1332</b><br>  
-![SSD1332](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1332.png)<br>
 Uncomment in settings file: <code>#include "../_display/SSD_1332_96x64.h"</code>
+![SSD1332](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1332.png)<br>
 Note: for this display you need to set it for SPI and connect all pin from D2 to D7 to ground
 ***
 
