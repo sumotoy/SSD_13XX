@@ -1008,7 +1008,7 @@ void SSD_13XX::drawRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t col
 }
 
 
-void SSD_13XX::drawArcHelper(uint16_t cx, uint16_t cy, uint16_t radius, uint16_t thickness, float start, float end, uint16_t color)
+void SSD_13XX::drawArcHelper(int16_t cx, int16_t cy, int16_t radius, int16_t thickness, float start, float end, uint16_t color)
 {
 	if (cx + radius > _width) return;
 	if (cy + radius > _height) return;
@@ -1258,7 +1258,7 @@ void SSD_13XX::drawEllipse(int16_t cx,int16_t cy,int16_t radiusW,int16_t radiusH
 }
 
 //fast
-void SSD_13XX::plot4points_cont(uint16_t cx, uint16_t cy, uint16_t x, uint16_t y, uint16_t color)
+void SSD_13XX::plot4points_cont(int16_t cx, int16_t cy, int16_t x, int16_t y, uint16_t color)
 {
 	drawPixel_cont(cx + x, cy + y, color);
 	if (x != 0) drawPixel_cont(cx - x, cy + y, color);

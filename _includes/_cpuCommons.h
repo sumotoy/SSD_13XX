@@ -33,7 +33,7 @@
 		//#define pgm_read_byte(addr) (*(const unsigned char *)(addr))
 		//#define pgm_read_word(addr) (*(const unsigned short *)(addr))
 		//typedef unsigned char prog_uchar;
-		//#define _smCharType	unsigned char
+		#define _smCharType	unsigned char
 		#if defined(SPI_HAS_TRANSACTION)
 			const uint32_t _common_max_SPI_speed 			= 24000000;
 		#endif

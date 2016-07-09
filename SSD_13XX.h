@@ -164,7 +164,7 @@ class SSD_13XX : public Print {
 	void		drawPolygon(int16_t x, int16_t y, uint8_t sides, int16_t diameter, float rot, uint16_t color);
 	void		drawMesh(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color);
 
-	void 		drawArc(uint16_t cx, uint16_t cy, uint16_t radius, uint16_t thickness, float start, float end, uint16_t color) {
+	void 		drawArc(int16_t cx, int16_t cy, int16_t radius, int16_t thickness, float start, float end, uint16_t color) {
 					if (start == 0 && end == _arcAngleMax) {
 						drawArcHelper(cx, cy, radius, thickness, 0, _arcAngleMax, color);
 					} else {
@@ -764,10 +764,10 @@ class SSD_13XX : public Print {
 					       Helpers
    ========================================================================*/
 	void 		closeTransaction(void);
-	void 		plot4points_cont(uint16_t cx, uint16_t cy, uint16_t x, uint16_t y, uint16_t color);
+	void 		plot4points_cont(int16_t cx, int16_t cy, int16_t x, int16_t y, uint16_t color);
 	void		drawCircle_cont_helper(int16_t x, int16_t y, int16_t radius, uint8_t cornername,uint16_t color);
 	void		fillCircle_cont_helper(int16_t x, int16_t y, int16_t radius, uint8_t cornername,int16_t delta, uint16_t color);
-	void 		drawArcHelper(uint16_t cx, uint16_t cy, uint16_t radius, uint16_t thickness, float start, float end, uint16_t color);
+	void 		drawArcHelper(int16_t cx, int16_t cy, int16_t radius, int16_t thickness, float start, float end, uint16_t color);
 	void 		fillRect_cont(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color1,uint16_t color2);
 	void 		fillTriangle_cont(int16_t x0, int16_t y0,int16_t x1, int16_t y1,int16_t x2, int16_t y2, uint16_t color);
 	void 		setArcParams(float arcAngleMax, int arcAngleOffset);
