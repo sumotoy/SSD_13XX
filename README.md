@@ -14,6 +14,9 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 
 <b>SSD1331</b><br>  
 ![SSD1331](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1331.png)<br>
+<b>SSD1331 RED PCB 0.96" Color Oled</b><br>  
+![SSD1331b](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1331b.png)<br>
+This Oled needs special connections so please do not use until I write a wiki for it!<br>
 <b>SSD1332</b><br>  
 ![SSD1332](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1332.png)<br>
 Note: for this display you need to set it for SPI and connect all pin from D2 to D7 to ground<br>
