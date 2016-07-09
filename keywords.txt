@@ -22,7 +22,7 @@ clearScreen	KEYWORD2
 drawPixel	KEYWORD2
 copyArea	KEYWORD2
 dimArea	KEYWORD2
-clearArea	KEYWORD2
+moveArea	KEYWORD2
 drawFastVLine	KEYWORD2
 drawFastHLine	KEYWORD2
 drawLine	KEYWORD2

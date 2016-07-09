@@ -69,15 +69,6 @@ static const uint8_t CMD_SETROW   			= 0x75;//SSD1332
 
 
 /* The remap command
-1331
-7,6) 00:256colors 					01:65K  						10:65k2
-5)	 0:disable com split			1:enable com split
-4)	 0:scan from COM0 to COM(n-1)	1:scan from COM(n-1) to COM0
-3)	 0:disable Left/Right swap		1:enable Left/Right swap
-2)	 0:RGB							1:GBR
-1)	 0:RAM col 0->95				1:RAM col 95->0
-0)	 0:Hor Address increment		1:Ver Address increment
-
 1332
 7,6) 00:256colors 					01:65K
 5)	 0:disable com split			1:enable com split

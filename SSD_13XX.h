@@ -144,7 +144,7 @@ class SSD_13XX : public Print {
 	void		clearScreen(void);//fill with color choosed in setBackground
 	void 		copyArea(int16_t sx0, int16_t sy0, int16_t sx1, int16_t sy1,int16_t dx, int16_t dy);
 	void 		dimArea(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
-	void 		clearArea(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
+	void 		moveArea(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
 	void		drawPixel(int16_t x, int16_t y, uint16_t color);
 	void		drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
 	void		drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);

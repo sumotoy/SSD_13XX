@@ -29,6 +29,10 @@
 	static const int16_t	SSD_WIDTH	=	96;
 	static const int16_t	SSD_HEIGHT 	=	64;
 	
+	static const int	 CMD_DLY_LINE			= 200;//SSD1351 400
+	static const int	 CMD_DLY_FILL			= 400;//SSD1351 800
+	static const int	 CMD_DLY_MIN			= 4;//this is the min delay (nicrosec) for this device
+	
 	/* Gamma Set*/
 	#define SSD_GAMMASET
 

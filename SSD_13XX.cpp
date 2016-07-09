@@ -560,7 +560,7 @@ void SSD_13XX::dimArea(int16_t x0, int16_t y0, int16_t x1, int16_t y1)
 	endTransaction();
 }
 
-void SSD_13XX::clearArea(int16_t x0, int16_t y0, int16_t x1, int16_t y1)
+void SSD_13XX::moveArea(int16_t x0, int16_t y0, int16_t x1, int16_t y1)
 {
 	if (_portrait){//not tested yet
 		swapVals(x0,y0);
