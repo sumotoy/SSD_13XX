@@ -4,12 +4,12 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 <b>NOTE: Currently in development, not all files upped! Please wait this note disappear before download.</b><br>
 
 <b>Current Version:</b><br>
- - 1.0r1: Tested only with various Teensy's. If not work with other CPU please report only, I NEVER tested the code with other CPU's so I expect this, but remember that is a preview and things gonna change soon.
+ - 1.0r1: SSD1331 tested only with various Teensy's. If not work with other CPU please report only, I NEVER tested the code with other CPU's so I expect this, but remember that is a preview and things gonna change soon.
 
 <b>Driver supported so far:</b><br>
-  - SSD_1331: (has hardware accelleration primitives)
-  - SSD_1332: (has hardware accelleration primitives)
-  - SSD_1351: (has hardware accelleration primitives) (1.27") (1.5")<br>
+  - SSD_1331: (has hardware accelleration primitives) (done)
+  - SSD_1332: (has hardware accelleration primitives) (currently in development)
+  - SSD_1351: (has hardware accelleration primitives) (1.27") (1.5") (to do)<br>
 
 <b>Driver that will never supported:</b><br>
  - SSD_1306: This device need a completely different library since it have no internal framebuffer.<br>
@@ -47,7 +47,7 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - User Font support (as seen in my last other libraries, use same font file format).
  - Uses TFT_ILI9163C command format that have many features and covers commands used in many libraries so it will be easy convert code to work with this one.<br>
 
-<b>Unique commands: (differs from other libraries due different chip features)</b><br>
+<b>SSD1331/32Unique commands: (differs from other libraries due different chip features)</b><br>
  - copyArea: copy a portion of screen into another location (hardware acc)
  - dimArea: dim a selected area
  - scroll: this chip has an standalone hardware scroll
@@ -59,7 +59,7 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - mode:PWRSAVE It's almost equal to sleep, display goes off
  - mode:DISP_DIM The display goes in Dim mode
  - mode:PROTECT The chip logic don't accept any commands, just mode:NORMAL to goes off of protect mode.<br>
-<b>Performances:</b><br>
+<b>Performances (SSD1331):</b><br>
 Early alpha wasnot working, only garbage on screen, it's here for reference<br>
 Alpha 1..2 was using absolute screen addressing (now abandoned)<br>
 Alpha 3..4 and beta's use new hardware rotation addressing. In Alpha 4 triangles rendering failed.<br>
@@ -85,6 +85,9 @@ Times are in Microseconds!<br>
 	|Icon Render|	| 	|   	|    	||1404|1312|
 	
 More or less, Beta 2 it's the release candidate, you can note how amazing fast in some operation, for example 406 microsec for a complete screen erase, 277 microsecs for the complete line test or the 183 microsec for the triangle test (remember that triangulation is used for 3d rendering as well, it should be fast), even text it's really fast. In comparison, for the Adafruit one I have to use milliseconds, it's amazing slow (even using the fast SPI mode). I will up a table comparison (for fun) whe I release out this one.
+
+<b>Shit goes on:</b><br>
+After SSD1331 I'm currently on SSD1332, I was suppose it's very easy but as always not! Did you think SSD1332 it's better than SSD1331? NO! The SSD1331 it's faster, better colors (the RED on SSD1332 is always orange, no matter settings!) and also cheaper.<br>
 
 <b>Licence:</b><br>
 Licenced under GNU V3.
