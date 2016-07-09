@@ -3,11 +3,11 @@ A very fast and full featured driver for <b>Solomon Systech SSD1331, SSD1332 and
 I have other 2 libraries here in github but have some issues and are quite old, this will replace both.<br>
 
 <b>Current Version:</b><br>
- - 1.0r1: SSD1331 tested only with various Teensy's. If not work with other CPU please report only, I NEVER tested the code with other CPU's so I expect this, but remember that is a preview and things gonna change soon.
+ - 1.0r1: SSD1331/SSD1332 tested only with various Teensy's. If not work with other CPU please report only, I NEVER tested the code with other CPU's so I expect this, but remember that is a preview and things gonna change soon.
 
 <b>Driver supported so far:</b><br>
   - <b>SSD_1331</b>: (has hardware accelleration primitives) (done)
-  - SSD_1332: (has hardware accelleration primitives) (currently in development)
+  - <b>SSD_1332</b>: (has hardware accelleration primitives) (done but need some tuning)
   - SSD_1351: (has hardware accelleration primitives) (1.27") (1.5") (to do)<br>
 
 <b>Driver that will never supported:</b><br>
@@ -86,7 +86,7 @@ Times are in Microseconds!<br>
 More or less, Beta 2 it's the release candidate, you can note how amazing fast in some operation, for example 406 microsec for a complete screen erase, 277 microsecs for the complete line test or the 183 microsec for the triangle test (remember that triangulation is used for 3d rendering as well, it should be fast), even text it's really fast. In comparison, for the Adafruit one I have to use milliseconds, it's amazing slow (even using the fast SPI mode). I will up a table comparison (for fun) whe I release out this one.
 
 <b>Shit goes on:</b><br>
-After SSD1331 I'm currently on SSD1332, I was suppose it's very easy but as always not! Did you think SSD1332 it's better than SSD1331? NO! The SSD1331 it's faster, better colors (the RED on SSD1332 is always orange, no matter settings!) and also cheaper.<br>
+After SSD1331 I'm currently on SSD1332, I was suppose it's very easy but as always not! Did you think SSD1332 it's better than SSD1331? NO! The SSD1331 it's faster, better colors (the RED on SSD1332 is always orange, no matter settings!) and also cheaper. I Got the SSD1332 working but color still looks weird to me.<br>
 
 <b>Licence:</b><br>
 Licenced under GNU V3.
