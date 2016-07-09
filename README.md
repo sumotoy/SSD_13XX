@@ -19,12 +19,12 @@ Uncomment in settings file: <code>#include "../_display/SSD_1331_96x64.h"</code>
 <b>SSD1331 RED PCB 0.96" Color Oled</b><br>  
 Uncomment in settings file: <code>#include "../_display/SSD_1331_REDPCB.h"</code>
 ![SSD1331b](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1331b.png)<br>
-This Oled needs special connections so please do not use until I write a wiki for it!
+This Oled needs to be configured for SPI and you should connect D2,D3,D4,D5,D6,D7 to GND!
 ***
 <b>SSD1332</b><br>  
 Uncomment in settings file: <code>#include "../_display/SSD_1332_96x64.h"</code>
 ![SSD1332](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1332.png)<br>
-Note: for this display you need to set it for SPI and connect all pin from D2 to D7 to ground
+This Oled needs to be configured for SPI and you should connect D2,D3,D4,D5,D6,D7 to GND!
 ***
 
 <b>How to set driver:</b><br>  
