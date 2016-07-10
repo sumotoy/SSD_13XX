@@ -15,7 +15,7 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 
 <b>SSD1331</b> Currently my preferred one...<br>  
 Uncomment in settings file: <code>#include "../_display/SSD_1331_96x64.h"</code>
-![SSD1331](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1331.png)
+![SSD1331](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1331.png)<br>
 <b>NOTE:</b>works out of the box, no hardware configurations, very bright
 ***
 <b>SSD1331 RED PCB 0.96" Color Oled</b><br>  
