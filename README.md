@@ -96,22 +96,22 @@ Beta 1..2 works and are usable, all function tested at any rotation.<br>
 CPU used for benchmarks: SSD1331, Teensy 3.2 at 96Mhz. Sketch:benchmarks_official.ino<br>
 Times are in Microseconds!<br>
 
-	|test               |Early|alpha 1|alpha 2|alpha 3|alpha 4|beta 1|beta 2|
-	|-------------------|------|------|------|------|------|------|------|
-	|Screen fill	|409|809|807|809|808|507|<b>406</b>|
-	|Text	|3983|3907|3963|3891|2357|2378|<b>2270</b>|
-	|Text2	|9564|9368|9517|9332|5047|5057|<b>4910</b>|
-	|Lines	|5576|10976|10978|10974|5561|299|<b>277</b>|
-	|Horiz/Vert Lines|6827|1800|1978|1964|1956|1954|<b>1956</b>|
-	|Rectangles (outline)|4508|8916|8919|8915|1126|1376|<b>1123</b>|
-	|Rectangles (filled)|4509|8924|8922|8920|1223|1499|<b>1214</b>|
-	|Circles (filled)|3635|18787|4488|4482|4481|4479|<b>4481</b>|
-	|Circles (outline)|4697|2851|2852|2849|2848|2847|<b>2847</b>|
-	|Triangles (outline)|517|505|508|504|503|204|<b>183</b>|
-	|Triangles (filled)|1916|11087|4284|4274|276|4274|<b>4275</b>|
-	|Rounded rects (outline)|1206|2942|1619|1586|1585|1587|<b>1588</b>|
-	|Rounded rects (filled)	|10271|8184|5814|5807|5036|5241|<b>5032</b>|
-	|Icon Render|	| 	|   	|    	||1404|<b>1312</b>|
+|test               |Early|alpha 1|alpha 2|alpha 3|alpha 4|beta 1|beta 2|
+|-------------------|------|------|------|------|------|------|------|
+|Screen fill	|409|809|807|809|808|507|<b>406</b>|
+|Text	|3983|3907|3963|3891|2357|2378|<b>2270</b>|
+|Text2	|9564|9368|9517|9332|5047|5057|<b>4910</b>|
+|Lines	|5576|10976|10978|10974|5561|299|<b>277</b>|
+|Horiz/Vert Lines|6827|1800|1978|1964|1956|1954|<b>1956</b>|
+|Rectangles (outline)|4508|8916|8919|8915|1126|1376|<b>1123</b>|
+|Rectangles (filled)|4509|8924|8922|8920|1223|1499|<b>1214</b>|
+|Circles (filled)|3635|18787|4488|4482|4481|4479|<b>4481</b>|
+|Circles (outline)|4697|2851|2852|2849|2848|2847|<b>2847</b>|
+|Triangles (outline)|517|505|508|504|503|204|<b>183</b>|
+|Triangles (filled)|1916|11087|4284|4274|276|4274|<b>4275</b>|
+|Rounded rects (outline)|1206|2942|1619|1586|1585|1587|<b>1588</b>|
+|Rounded rects (filled)	|10271|8184|5814|5807|5036|5241|<b>5032</b>|
+|Icon Render|	| 	|   	|    	||1404|<b>1312</b>|
 	
 More or less, Beta 2 it's the release candidate, you can note how amazing fast in some operation, for example 406 microsec for a complete screen erase, 277 microsecs for the complete line test or the 183 microsec for the triangle test (remember that triangulation is used for 3d rendering as well, it should be fast), even text it's really fast. In comparison, for the Adafruit one I have to use milliseconds, it's amazing slow (even using the fast SPI mode). I will up a table comparison (for fun) whe I release out this one.
 
