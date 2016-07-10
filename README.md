@@ -28,6 +28,11 @@ Uncomment in settings file: <code>#include "../_display/SSD_1332_96x64.h"</code>
 ![SSD1332](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1332.png)<br>
 <b>NOTE:</b>This Oled needs to be configured for SPI (jumpers on the back) and you <b>should</b> connect D2,D3,D4,D5,D6,D7 to GND! I will not raccomand this, red color is still orange to me.
 ***
+<b>SSD1351 128x128</b><br>  
+Uncomment in settings file: <code>#include "../_display/SSD_1351_128x128.h"</code>
+![SSD1332](https://github.com/sumotoy/SSD_13XX/blob/docs/images/ssd1351.png)<br>
+
+***
 
 <b>How to set driver:</b><br>  
 You need to open _settings/SSD_13XX_settings.h with a text editor and uncomment the driver you want to use:<br>
