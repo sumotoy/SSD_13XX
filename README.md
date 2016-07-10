@@ -81,11 +81,11 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - mode:DISP_DIM The display goes in Dim mode (only SSD1331)
  - mode:PROTECT The chip logic don't accept any commands, just mode:NORMAL to goes off of protect mode.(only SSD1331)<br>
 <b>Performances (SSD1331):</b><br>
-Early alpha wasnot working, only garbage on screen, it's here for reference<br>
+Early alpha was not working, only garbage on screen, it's here for just for reference<br>
 Alpha 1..2 was using absolute screen addressing (now abandoned)<br>
-Alpha 3..4 and beta's use new hardware rotation addressing. In Alpha 4 triangles rendering failed.<br>
+Alpha 3..4 and beta's use hardware rotation addressing. (In Alpha 4 triangles rendering failed)<br>
 Beta 1..2 works and are usable, all function tested at any rotation.<br>
-CPU used for benchmarks: Teensy 3.2 at 96Mhz. Sketch:benchmarks_official.ino<br>
+CPU used for benchmarks: SSD1331, Teensy 3.2 at 96Mhz. Sketch:benchmarks_official.ino<br>
 Times are in Microseconds!<br>
 
 	|test               |Early|alpha 1|alpha 2|alpha 3|alpha 4|beta 1|beta 2|
