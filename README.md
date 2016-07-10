@@ -3,13 +3,13 @@ A very fast and full featured driver for <b>Solomon Systech SSD1331, SSD1332, SS
 I have other 2 libraries here in github but have some issues and are quite old, this will replace both.<br>
 
 <b>Current Version:</b><br>
- - 1.0r1: SSD1331/SSD1332 tested only with various Teensy's. If not work with other CPU please report only, I NEVER tested the code with other CPU's so I expect this, but remember that is a preview and things gonna change soon.
+ - 1.0r2: SSD1331/SSD1332/SSD1351 tested only with various Teensy's. If not work with other CPU please report only, I NEVER tested the code with other CPU's so I expect this, but remember that is a preview and things gonna change soon.
 
 <b>Driver description (what I should choose?):</b><br>
-* <b>SSD1331</b> is a full featured driver for 96x64 oled with a lot of useful registers and an hardware accellerated standalone scroll that I never seen in other drivers. This driver is currently supported.<br>
-* <b>SSD1332</b> is the 'low cost' version of SSD1331, much less features, less fast (but use some Hardware Accellerated primitives), no scrolling. This driver is currently supported.<br>
+* <b>SSD1331</b> is a full featured driver for 96x64 oled with a lot of useful registers and an hardware accellerated standalone scroll that I never seen in other drivers. This controller is currently supported.<br>
+* <b>SSD1332</b> is the 'low cost' version of SSD1331, much less features, less fast (but use some Hardware Accellerated primitives), no scrolling. This controller is currently supported.<br>
 * <b>SSD1322</b> used in some wide oled's.(in development)<br>
-* <b>SSD1351</b> Can drive 128x128 Oled's, doesn't have any Hardware Accellerated primitive (apart scrolling as SD1331), pretty featured. (almost ready)<br>
+* <b>SSD1351</b> Can drive 128x128 Oled's, doesn't have any Hardware Accellerated primitive (apart scrolling as SD1331), pretty featured. This controller is currently supported.<br>
 
 ***
 
@@ -61,6 +61,7 @@ I have 2 old libraries here on github, but digging inside datasheet I discover t
 Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last libraries here on github, of course there's differences related to hardware (OLED don't have backlight pin, etc.)
 ***
 <b>Features:</b><br>
+ - A display file for each oled, easy to customize.
  - Blazing fast, near chip hardware limits, expecially with Teensy's.
  - Any feature enabled for any rotation, using native hardware accellerated primitives.
  - Standard SPI & SPI transaction compatible, play nice with other SPI devices.
