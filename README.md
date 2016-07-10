@@ -1,5 +1,5 @@
 # SSD_13XX
-A very fast and full featured driver for <b>Solomon Systech SSD1331, SSD1332 and SSD1351</b> drivers designed mainly for Oled's compatible with Teensy's and many other MCU's.
+A very fast and full featured driver for <b>Solomon Systech SSD1331, SSD1332, SSD1322 and SSD1351</b> drivers designed mainly for Oled's compatible with Teensy's and many other MCU's.
 I have other 2 libraries here in github but have some issues and are quite old, this will replace both.<br>
 
 <b>Current Version:</b><br>
@@ -8,7 +8,8 @@ I have other 2 libraries here in github but have some issues and are quite old, 
 <b>Driver description (what I should choose?):</b><br>
 * <b>SSD1331</b> is a full featured driver for 96x64 oled with a lot of useful registers and an hardware accellerated standalone scroll that I never seen in other drivers. This driver is currently supported.<br>
 * <b>SSD1332</b> is the 'low cost' version of SSD1331, much less features, less fast (but use some Hardware Accellerated primitives), no scrolling. This driver is currently supported.<br>
-* <b>SSD1351</b> Can drive 128x128 Oled's, doesn't have any Hardware Accellerated primitive, pretty featured. (in development)<br>
+* <b>SSD1322</b> used in some wide oled's.(in development)<br>
+* <b>SSD1351</b> Can drive 128x128 Oled's, doesn't have any Hardware Accellerated primitive (apart scrolling as SD1331), pretty featured. (in development)<br>
 
 ***
 
