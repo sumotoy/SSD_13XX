@@ -50,7 +50,7 @@ However, this is open source an released with GNU V3 so you can fork library and
 I got my first SSD_1331 on Ebay, find a library compatible at Adafruit but I was extremely disappointed about performances/features and bugs, so I decided to write a new one from scratch based on my popular TFT_ILI9163C. Since this devices are very similar I have decided to build up an unique library.<br>
 I have 2 old libraries here on github, but digging inside datasheet I discover that I can get much more by rewrote almost everithing. As result I got all chip features enabled and it's probably the faster driver around, much more than adafruit and works with all features at any screen rotation by using all the time his hardware accellerated primitives<br>
 Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last libraries here on github, of course there's differences related to hardware (OLED don't have backlight pin, etc.)
-
+***
 <b>Features:</b><br>
  - Blazing fast, near chip hardware limits, expecially with Teensy's.
  - Any feature enabled for any rotation, using native hardware accellerated primitives.
@@ -68,6 +68,8 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - User Font support (as seen in my last other libraries, use same font file format).
  - Uses TFT_ILI9163C command format that have many features and covers commands used in many libraries so it will be easy convert code to work with this one.<br>
 
+***
+
 <b>SSD1331/32 Unique commands: (differs from other libraries due different chip features)</b><br>
  - <b>copyArea</b>: copy a portion of screen into another location (hardware acc.)
  - <b>dimArea</b>: dim a selected area (only SSD1331)
@@ -80,6 +82,9 @@ Commands and features are pretty similar to TFT_9163C,TFT_7735,TFT_ILI93XX last 
  - mode:<b>PWRSAVE</b> It's almost equal to sleep, display goes off
  - mode:<b>DISP_DIM</b> The display goes in Dim mode (only SSD1331)
  - mode:<b>PROTECT</b> The chip logic don't accept any commands, just mode:NORMAL to goes off of protect mode.(only SSD1331)<br>
+
+***
+
 <b>Performances (SSD1331):</b><br>
 Early alpha was not working, only garbage on screen, it's here for just for reference<br>
 Alpha 1..2 was using absolute screen addressing (now abandoned)<br>
@@ -107,6 +112,7 @@ Times are in Microseconds!<br>
 	
 More or less, Beta 2 it's the release candidate, you can note how amazing fast in some operation, for example 406 microsec for a complete screen erase, 277 microsecs for the complete line test or the 183 microsec for the triangle test (remember that triangulation is used for 3d rendering as well, it should be fast), even text it's really fast. In comparison, for the Adafruit one I have to use milliseconds, it's amazing slow (even using the fast SPI mode). I will up a table comparison (for fun) whe I release out this one.
 
+***
 <b>Licence:</b><br>
 Licensed under GNU V3.
  
