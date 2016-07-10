@@ -1,3 +1,21 @@
+/*=========================================================================================
+	Part of SSD_13XX library
+    Copyright (c) 2014/2015/2016, .S.U.M.O.T.O.Y., coded by Max MC Costa.
+
+    SSD_13XX Library is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SSD_13XX Library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+===========================================================================================*/
+
 #include "SSD_13XX.h"
 
 
@@ -108,9 +126,6 @@
 void SSD_13XX::begin(bool avoidSPIinit)
 {
 //initialize Vars
-#if defined(SSD_GAMMASET)
-	uint8_t i;
-#endif
 	_remapReg		= 0;
 	_currentMode	= 0b00000000;
 	_portrait 		= false;
@@ -280,68 +295,82 @@ void SSD_13XX::begin(bool avoidSPIinit)
 			_remapReg |= ((0 << 5));
 		}
 		writecommand_cont(CMD_DISPLAYOFF);
-		
+		setRegister_cont(CMD_CLOCKDIV,SSD_CLOCKDIV);
+		setRegister_cont(CMD_SETMULTIPLEX,SSD_SETMULTIPLEX);
 		setRegister_cont(CMD_STARTLINE,SSD_STARTLINE);
 		setRegister_cont(CMD_DISPLAYOFFSET,SSD_DISPLAYOFFSET);
 		setRegister_cont(CMD_PHASEPERIOD,SSD_PHASEPERIOD);
-		setRegister_cont(CMD_SETMULTIPLEX,SSD_SETMULTIPLEX);
 		setRegister_cont(CMD_SETMASTER,SSD_SETMASTER);
 		setRegister_cont(CMD_POWERMODE,SSD_POWERMODE);
-		setRegister_cont(CMD_CLOCKDIV,SSD_CLOCKDIV);
-		#if defined(_SSD_1331_96X64_H)
-			setRegister_cont(CMD_PRECHARGE,SSD_PRECHARGE);
-			setRegister_cont(CMD_PRECHARGEA,SSD_PRECHARGE_A);
-			setRegister_cont(CMD_PRECHARGEB,SSD_PRECHARGE_B);
-			setRegister_cont(CMD_PRECHARGEC,SSD_PRECHARGE_C);
-			setRegister_cont(CMD_PRECHARGELEVEL,SSD_PRECHARGELEVEL);
-			writecommand_cont(CMD_DIMMODESET);
-			writecommand_cont(0);
-			writecommand_cont(SSD_DIMMDESET_A);
-			writecommand_cont(SSD_DIMMDESET_B);
-			writecommand_cont(SSD_DIMMDESET_C);
-			writecommand_cont(SSD_DIMMDESET_PC);
-		#endif
-		setRegister_cont(CMD_VCOMH,SSD_VCOMH);
 		setRegister_cont(CMD_MASTERCURRENT,SSD_MASTERCURRENT);
+		#if defined(SSD_GAMMASET)
+			writecommand_cont(CMD_GRAYSCALE); for (uint8_t i =0;i<32;i++){writecommand_cont(SSD_GRAYTABLE[i]);}
+		#else
+			writecommand_cont(CMD_LINEARGRAY);
+		#endif
 		setRegister_cont(CMD_CONTRASTA,SSD_CONTRAST_A);
 		setRegister_cont(CMD_CONTRASTB,SSD_CONTRAST_B);
 		setRegister_cont(CMD_CONTRASTC,SSD_CONTRAST_C);
 		setRegister_cont(CMD_VPACOLORLVL,SSD_VPACOLORLVL);
 		setRegister_cont(CMD_VPBCOLORLVL,SSD_VPBCOLORLVL);
 		setRegister_cont(CMD_VPCCOLORLVL,SSD_VPCCOLORLVL);
-		_fillUtility(1);
-		#if defined(SSD_GAMMASET)
-			writecommand_cont(CMD_GRAYSCALE); for (i=0;i<32;i++){writecommand_cont(SSD_GRAYTABLE[i]);}
-		#else
-			writecommand_cont(CMD_LINEARGRAY);
+		#if defined(_SSD_1331_96X64_H)
+			writecommand_cont(CMD_DIMMODESET);
+			writecommand_cont(0);
+			writecommand_cont(SSD_DIMMDESET_A);
+			writecommand_cont(SSD_DIMMDESET_B);
+			writecommand_cont(SSD_DIMMDESET_C);
+			writecommand_cont(SSD_DIMMDESET_PC);
+			setRegister_cont(CMD_PRECHARGE,SSD_PRECHARGE);
+			setRegister_cont(CMD_PRECHARGEA,SSD_PRECHARGE_A);
+			setRegister_cont(CMD_PRECHARGEB,SSD_PRECHARGE_B);
+			setRegister_cont(CMD_PRECHARGEC,SSD_PRECHARGE_C);
+			setRegister_cont(CMD_PRECHARGELEVEL,SSD_PRECHARGELEVEL);
 		#endif
-		//now clear display memory
-		setAddrWindow_cont(0,0,SSD_WIDTH-1,SSD_HEIGHT-1,false);
-		//_pushColors_cont(_defaultBgColor,SSD_WIDTH);//not needed?
+		setRegister_cont(CMD_VCOMH,SSD_VCOMH);
+		_fillUtility(1);
 	#elif defined(_SSD_1351_96X64_H) || defined(_SSD_1351_128X96_H) || defined(_SSD_1351_128X128_H)
-		setRegister_cont(CMD_COMMANDLOCK,SSD_COMMANDLOCK1);
-		setRegister_cont(CMD_COMMANDLOCK,SSD_COMMANDLOCK2);
+		if (SSD_COMSPLIT == 1){
+			_remapReg |= ((1 << 5));
+		} else {
+			_remapReg |= ((0 << 5));
+		}
+		setRegister_cont(CMD_CMDLOCK,SSD_COMMANDLOCK1);
+		setRegister_cont(CMD_CMDLOCK,SSD_COMMANDLOCK2);
 		writecommand_cont(CMD_DISPLAYOFF);
 		setRegister_cont(CMD_CLOCKDIV,SSD_CLOCKDIV);
 		setRegister_cont(CMD_MUXRATIO,SSD_MUXRATIO);
-		setRegister_cont(CMD_SETREMAP,SSD_SETREMAP);
-		setAddrWindow_cont(0,0,SSD_WIDTH,SSD_HEIGHT,false);
 		setRegister_cont(CMD_STARTLINE,SSD_STARTLINE);
 		setRegister_cont(CMD_DISPLAYOFFSET,SSD_DISPLAYOFFSET);
 		setRegister_cont(CMD_SETGPIO,SSD_SETGPIO);
 		setRegister_cont(CMD_FUNCTIONSELECT,SSD_FUNCTIONSELECT);
-		setRegister_cont(CMD_PRECHARGE,SSD_PRECHARGE);
-		setRegister_cont(CMD_VCOMH,SSD_VCOMH);
-		writecommand_cont(CMD_CONTRASTABC);
-		writedata8_cont(SSD_CONTRAST_A);writedata8_cont(SSD_CONTRAST_B);writedata8_cont(SSD_CONTRAST_C);
-		setRegister_cont(CMD_CONTRASTMASTER,SSD_CONTRASTMASTER);
 		writecommand_cont(CMD_SETVSL);
 		writedata8_cont(SSD_SETVSL_A);writedata8_cont(SSD_SETVSL_B);writedata8_cont(SSD_SETVSL_C);
+		writecommand_cont(CMD_CONTRASTABC);
+		writedata8_cont(SSD_CONTRAST_A);writedata8_cont(SSD_CONTRAST_B);writedata8_cont(SSD_CONTRAST_C);
+		setRegister_cont(CMD_MASTERCURRENT,SSD_MASTERCURRENT);
+		writecommand_cont(CMD_DISPLAYENHANCE);
+		if (SSD_ENHANCE){
+			writedata8_cont(0xA4);
+		} else {
+			writedata8_cont(0x00);
+		}
+		writedata8_cont(0x00);
+		writedata8_cont(0x00);
+		#if defined(SSD_GAMMASET)
+			//writecommand_cont(CMD_GRAYSCALE); for (uint8_t i =0;i<32;i++){writedata8_cont(SSD_GRAYTABLE[i]);}
+		#else
+			writecommand_cont(CMD_USELUT);
+		#endif
+		// phase here
+		setRegister_cont(CMD_PRECHARGE,SSD_PRECHARGE);
 		setRegister_cont(CMD_PRECHARGE2,SSD_PRECHARGE2);
+		setRegister_cont(CMD_VCOMH,SSD_VCOMH);
 	#endif
+	//setAddrWindow_cont(0,0,SSD_WIDTH-1,SSD_HEIGHT-1,false);// ???
+	//_pushColors_cont(_defaultBgColor, SSD_CGRAM);//???
 	//Normal Display and turn ON
 	writecommand_cont(CMD_NORMALDISPLAY);
-	//_fillUtility(true);
 	writecommand_last(CMD_DISPLAYON);
 	endTransaction();
 	delay(60);
@@ -354,13 +383,13 @@ void SSD_13XX::begin(bool avoidSPIinit)
 		setFont(&nullfont);
 	#endif
 	delay(1);
-
+	changeMode(NORMAL);
 }
 
 void SSD_13XX::setRegister_cont(const uint8_t cmd,uint8_t data)
 {
 	writecommand_cont(cmd);
-	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
+	#if defined(_SSD_USECMDASDATA)
 		writecommand_cont(data);
 	#else
 		writedata8_cont(data);
@@ -407,49 +436,52 @@ void SSD_13XX::changeMode(const enum SSD_13XX_modes m)
 					//writecommand_cont(CMD_IDLEOF);
 				}
 				*/
+				
+				#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
 				if (_currentMode == 8) {//was in powerMode?
 					setRegister_cont(CMD_POWERMODE,SSD_POWERMODE);
 					//delay(120);//needed
 				}
+				#endif
+				
 				if (_currentMode == 4){//was inverted?
 					//SSD1332 should need only CMD_NORMALDISPLAY!?!
-					#if defined(_SSD_1331_96X64_H)
+					#if defined(_SSD_1331_REG_H_)
 					writecommand_cont(CMD_DINVOF);
 					#endif
 				}
-				#if defined(_SSD_1331_96X64_H)
+				#if defined(_SSD_1331_REG_H_) || defined(_SSD_1351_REG_H_)
 				if (_currentMode == 9){//was in protect mode?
 					setRegister_cont(CMD_CMDLOCK,0x12);//unlock
 				}
 				#endif
+				/*
 				if (_currentMode == 12 || _currentMode == 13){//all on or off?
-					//setRegister_cont(CMD_CMDLOCK,0x12);//unlock
+					//nothing
 				}
+				*/
 				writecommand_cont(CMD_NORMALDISPLAY);
 				_currentMode = 0;
 			break;
-			
 			case ALL_ON:
 				writecommand_cont(CMD_DISPLAYALLON);
 				_currentMode = 12;
 			break;
-			
-			
-			case ALL_OFF: 
+			case ALL_OFF:
 				writecommand_cont(CMD_DISPLAYALLOFF);
 				_currentMode = 13;
 			break;
-			
 			case PWRSAVE: //power mode ON
-				writecommand_cont(CMD_POWERMODE);
-				#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
+				#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
+					writecommand_cont(CMD_POWERMODE);
 					writecommand_last(0x1A);
+					_currentMode = 8;
+					delay(5);//needed
 				#else
-					writedata8_last(0x1A);
+					//TODO: exist?
+					//writedata8_last(0x1A);
 				#endif
 				endTransaction();
-				_currentMode = 8;
-				delay(5);//needed
 				return;
 			case INVERT:
 				writecommand_cont(CMD_INVERTDISPLAY);//OK
@@ -463,18 +495,23 @@ void SSD_13XX::changeMode(const enum SSD_13XX_modes m)
 				writecommand_cont(CMD_DISPLAYOFF);
 				_currentMode = 6;
 			break;
+			/*
 			case DISP_DIM:
 				writecommand_cont(CMD_DISPLAYDIM);
 				_currentMode = 7;
 			break;
+			*/
 			case PROTECT:
-				#if defined(_SSD_1331_96X64_H)
+				#if defined(_SSD_1331_REG_H_) || defined(_SSD_1351_REG_H_)
 				setRegister_cont(CMD_CMDLOCK,0x16);//lock
 				_currentMode = 9;
+				#else
+					endTransaction();
+					return;
 				#endif
 			break;
 			default:
-				closeTransaction();
+				endTransaction();
 				return;
 			break;
 		}
@@ -490,22 +527,21 @@ uint8_t SSD_13XX::getMode(void)
 
 void SSD_13XX::setBrightness(uint8_t brightness)
 {
+	
 	if (brightness > 15) brightness = 15;
 	startTransaction();
 		writecommand_cont(CMD_MASTERCURRENT);
-		writecommand_last(brightness);
+		#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
+			writecommand_last(brightness);
+		#else
+			writedata8_last(brightness);
+		#endif
 	endTransaction();
 }
 
 void SSD_13XX::setArea(int16_t x0, int16_t y0, int16_t x1, int16_t y1)
 {
 	startTransaction();
-	/*
-	if (_portrait){
-		swapVals(x0,y0);
-		swapVals(x1,y1);
-	}
-	*/
 	setAddrWindow_cont(x0,y0,x1,y1,true);
 	closeTransaction();
 }
@@ -513,6 +549,7 @@ void SSD_13XX::setArea(int16_t x0, int16_t y0, int16_t x1, int16_t y1)
 
 void SSD_13XX::copyArea(int16_t sx0, int16_t sy0, int16_t sx1, int16_t sy1,int16_t dx, int16_t dy)
 {
+	#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
 	if (_portrait){//not tested yet
 		swapVals(sx0,sy0);
 		swapVals(sx1,sy1);
@@ -520,66 +557,48 @@ void SSD_13XX::copyArea(int16_t sx0, int16_t sy0, int16_t sx1, int16_t sy1,int16
 	}
 	startTransaction();
 	writecommand_cont(CMD_DRAWCOPY);
-	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 		writecommand_cont(sx0 & 0xFF);
 		writecommand_cont(sy0 & 0xFF);
 		writecommand_cont(sx1 & 0xFF);
 		writecommand_cont(sy1 & 0xFF);
 		writecommand_cont(dx & 0xFF);
 		writecommand_last(dy & 0xFF);
-	#else
-		writedata8_cont(sx0 & 0xFF);
-		writedata8_cont(sy0 & 0xFF);
-		writedata8_cont(sx1 & 0xFF);
-		writedata8_cont(sy1 & 0xFF);
-		writedata8_cont(dx & 0xFF);
-		writedata8_last(dy & 0xFF);
-	#endif
 	endTransaction();
+	#endif
 }
 
 void SSD_13XX::dimArea(int16_t x0, int16_t y0, int16_t x1, int16_t y1)
 {
+	#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
 	if (_portrait){//not tested yet
 		swapVals(x0,y0);
 		swapVals(x1,y1);
 	}
 	startTransaction();
 	writecommand_cont(CMD_DIMWINDOW);
-	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 		writecommand_cont(x0 & 0xFF);
 		writecommand_cont(y0 & 0xFF);
 		writecommand_cont(x1 & 0xFF);
 		writecommand_last(y1 & 0xFF);
-	#else
-		writedata8_cont(x0 & 0xFF);
-		writedata8_cont(y0 & 0xFF);
-		writedata8_cont(x1 & 0xFF);
-		writedata8_last(y1 & 0xFF);
-	#endif
 	endTransaction();
+	#endif
 }
 
 void SSD_13XX::moveArea(int16_t x0, int16_t y0, int16_t x1, int16_t y1)
 {
+	#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
 	if (_portrait){//not tested yet
 		swapVals(x0,y0);
 		swapVals(x1,y1);
 	}
 	startTransaction();
 	writecommand_cont(CMD_CLRWINDOW);
-	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 		writecommand_cont(x0 & 0xFF);
 		writecommand_cont(y0 & 0xFF);
 		writecommand_cont(x1 & 0xFF);
 		writecommand_last(y1 & 0xFF);
-	#else
-		writedata8_cont(x0 & 0xFF);
-		writedata8_cont(y0 & 0xFF);
-		writedata8_cont(x1 & 0xFF);
-		writedata8_last(y1 & 0xFF);
-	#endif
 	endTransaction();
+	#endif
 }
 
 uint8_t SSD_13XX::getRotation(void)
@@ -590,18 +609,23 @@ uint8_t SSD_13XX::getRotation(void)
 void SSD_13XX::setColorDepth(uint8_t depth)
 {
 	if (depth == 16){
-		_colorDepth = 1;
+		_colorDepth = 16;
 		_remapReg |= ((0 << 7) | (1 << 6));
+	#if defined(_SSD_1351_REG_H_)
+	} else if (depth == 18) {
+		_colorDepth = 16;
+		_remapReg |= ((1 << 7) | (0 << 6));
+	#endif
 	} else {
-		_colorDepth = 0;
+		_colorDepth = 8;
 		_remapReg |= ((0 << 7) | (0 << 6));
 	}
 }
 
 void SSD_13XX::setColorOrder(bool order)
 {
-	#if defined(_SSD_1331_REG_H_)
-	_remapReg |= ((order << 2));
+	#if defined(_SSD_1331_REG_H_) || defined(_SSD_1351_REG_H_)
+		_remapReg |= ((order << 2));
 	#endif
 }
 
@@ -611,56 +635,69 @@ void SSD_13XX::setRotation(uint8_t m)
 	_rotation = m % 4; // can't be higher than 3
 	_portrait = false;
 	_remapReg &= ~(0x1B);//clear bit 0,1,3,4
+	_width  = SSD_WIDTH;
+	_height = SSD_HEIGHT;
 	if (_rotation == 0){
-		#if defined(_SSD_1331_96X64_H)
+		#if defined(_SSD_1331_REG_H_)
 			_remapReg |= ((1 << 4) | (1 << 1));//bit 4 & 1
-		#elif defined(_SSD_1332_96X64_H)
+		#elif defined(_SSD_1332_REG_H_)
 			_remapReg |= ((1 << 4));//bit 4
+		#elif defined(_SSD_1351_REG_H_)
+			_remapReg |= ((1 << 4));//(1)
 		#else
 			//TODO
-			_remapReg |= ((1 << 4) | (1 << 1));//bit 4 & 1
 		#endif
-		_width  = SSD_WIDTH;
-		_height = SSD_HEIGHT;
 	} else if (_rotation == 1){
-		#if defined(_SSD_1331_96X64_H)
+		#if defined(_SSD_1331_REG_H_)
 			_remapReg |= ((1 << 4) | (1 << 0));//bit 4 & 0
-		#elif defined(_SSD_1332_96X64_H)
+			swapVals(_width,_height);
+			_portrait = true;
+		#elif defined(_SSD_1332_REG_H_)
 			_remapReg |= ((1 << 4) | (1 << 1) | (1 << 0));//bit 4 & 1 & 0
+			swapVals(_width,_height);
+			_portrait = true;
+		#elif defined(_SSD_1351_REG_H_)
+			_remapReg |= ((1 << 4) | (1 << 1) | (1 << 0));//(2)
+			swapVals(_width,_height);
+			_portrait = true;
 		#else
 			//TODO
-			_remapReg |= ((1 << 4) | (1 << 0));//bit 4 & 0
 		#endif
-		_width  = SSD_HEIGHT;
-		_height = SSD_WIDTH;
-		_portrait = true;
 	} else if (_rotation == 2){
-		#if defined(_SSD_1331_96X64_H)
-		#elif defined(_SSD_1332_96X64_H)
+		#if defined(_SSD_1331_REG_H_)
+		#elif defined(_SSD_1332_REG_H_)
 			_remapReg |= ((1 << 1));//bit 1
+		#elif defined(_SSD_1351_REG_H_)
+			_remapReg |= ((1 << 1));//(3)
 		#else
 			//TODO
 		#endif
-		_width  = SSD_WIDTH;
-		_height = SSD_HEIGHT;
 	} else {
-		#if defined(_SSD_1331_96X64_H)
+		#if defined(_SSD_1331_REG_H_)
 			_remapReg |= ((1 << 1) | (1 << 0));//bit 1 & 0
-		#elif defined(_SSD_1332_96X64_H)
+			swapVals(_width,_height);
+			_portrait = true;
+		#elif defined(_SSD_1332_REG_H_)
 			_remapReg |= ((1 << 0));//bit 0
+			swapVals(_width,_height);
+			_portrait = true;
+		#elif defined(_SSD_1351_REG_H_)
+			_remapReg |= ((1 << 0));//(0)
+			swapVals(_width,_height);
+			_portrait = true;
 		#else
-			_remapReg |= ((1 << 1) | (1 << 0));//bit 1 & 0
 			//TODO
 		#endif
-		_width  = SSD_HEIGHT;
-		_height = SSD_WIDTH;
-		_portrait = true;
 	}
 	_cursorX = 0; _cursorY = 0;//always reset cursor
 	startTransaction();
 		setAddrWindow_cont(0,0,_height-1,_width-1,false);
 		writecommand_cont(CMD_SETREMAP);//set remap
-		writecommand_last(_remapReg);
+		#if defined(_SSD_USECMDASDATA)
+			writecommand_last(_remapReg);
+		#else
+			writedata8_last(_remapReg);
+		#endif
 	endTransaction();
 }
 
@@ -698,33 +735,46 @@ e:Set time interval between each scroll step
 */
 void SSD_13XX::defineScrollArea(int16_t a, int16_t b, int16_t c, int16_t d, uint8_t e)
 {
-	uint8_t spd;
+	if (b+c > SSD_HEIGHT) return;
+	uint8_t spd = 0;
 	e = e % 4;
-	if (e == 0){
-		spd = 0b00000000;
-	} else if (e == 1){
-		spd = 0b00000001;
-	} else if (e == 2){
-		spd = 0b00000010;
-	} else {
-		spd = 0b00000011;
-	}
-	startTransaction();
-	writecommand_cont(CMD_SCROLL_SET);
-	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
+	#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
+		if (e == 0){
+			spd = 0b00000000;
+		} else if (e == 1){
+			spd = 0b00000001;
+		} else if (e == 2){
+			spd = 0b00000010;
+		} else {
+			spd = 0b00000011;
+		}
+		startTransaction();
+		writecommand_cont(CMD_SCROLL_SET);
+
 		writecommand_cont(a & 0xFF);
 		writecommand_cont(b & 0xFF);
 		writecommand_cont(c & 0xFF);
 		writecommand_cont(d & 0xFF);
 		writecommand_last(spd);
-	#else
-		writedata8_cont(a & 0xFF);
+		endTransaction();
+	#elif defined(_SSD_1351_REG_H_)
+		if (e == 1){
+			spd |= ((1 << 0));
+		} else if (e == 2){
+			spd |= ((1 << 1));
+		} else if (e > 2) {
+			spd |= ((1 << 1) | (1 << 0));
+		}
+		startTransaction();
+		writecommand_cont(CMD_HORIZSCROLL);
+		writedata8_cont(0b00000001);//0b10000001
 		writedata8_cont(b & 0xFF);
 		writedata8_cont(c & 0xFF);
-		writedata8_cont(d & 0xFF);
+		writedata8_cont(0);
 		writedata8_last(spd);
+		endTransaction();
 	#endif
-	endTransaction();
+	
 }
 
 
@@ -864,23 +914,29 @@ void SSD_13XX::drawPixel(int16_t x, int16_t y, uint16_t color)
 //+++++++++OK
 void SSD_13XX::fillScreen(uint16_t color)
 {
-	uint8_t r1,g1,b1;
-	_convertColor(color,r1,g1,b1);
-	startTransaction();
-	_fillUtility(1);
-	writecommand_cont(CMD_DRAWRECT);
-	#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
+	#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
+		uint8_t r1,g1,b1;
+		_convertColor(color,r1,g1,b1);
+		startTransaction();
+		_fillUtility(1);
+		writecommand_cont(CMD_DRAWRECT);
 		writecommand16_cont(0);
 		writecommand_cont(SSD_WIDTH-1);
 		writecommand_cont(SSD_HEIGHT-1);
+		_sendColor_cont(r1,g1,b1);
+		_sendColor_cont(r1,g1,b1);
+		delayMicroseconds(CMD_DLY_FILL);//CMD_DLY_FILL
 	#else
-		writedata16_cont(0);
-		writedata8_cont(SSD_WIDTH-1);
-		writedata8_cont(SSD_HEIGHT-1);
+		startTransaction();
+		setAddrWindow_cont(
+				0,
+				0,
+				SSD_WIDTH - 1,
+				SSD_HEIGHT - 1,
+				false
+		);
+		_pushColors_cont(color, SSD_CGRAM);
 	#endif
-	_sendColor_cont(r1,g1,b1);
-	_sendColor_cont(r1,g1,b1);
-	delayMicroseconds(CMD_DLY_FILL);//CMD_DLY_FILL
 	closeTransaction();
 }
 
@@ -891,6 +947,7 @@ void SSD_13XX::fillScreen(uint16_t color)
 void SSD_13XX::fillScreen(uint16_t color1,uint16_t color2)
 {
 	startTransaction();
+	#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
 	if (color1 != color2){
 		fillRect_cont(0,0,SSD_WIDTH,SSD_HEIGHT,color1,color2);
 	} else {
@@ -898,19 +955,27 @@ void SSD_13XX::fillScreen(uint16_t color1,uint16_t color2)
 		_convertColor(color1,r1,g1,b1);
 		_fillUtility(1);
 		writecommand_cont(CMD_DRAWRECT);
-		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
-			writecommand16_cont(0);
-			writecommand_cont(SSD_WIDTH-1);
-			writecommand_cont(SSD_HEIGHT-1);
-		#else
-			writedata16_cont(0);
-			writedata8_cont(SSD_WIDTH-1);
-			writedata8_cont(SSD_HEIGHT-1);
-		#endif
+		writecommand16_cont(0);
+		writecommand_cont(SSD_WIDTH-1);
+		writecommand_cont(SSD_HEIGHT-1);
 		_sendColor_cont(r1,g1,b1);
 		_sendColor_cont(r1,g1,b1);
 		delayMicroseconds(CMD_DLY_FILL);
 	}
+	#else
+		if (color1 != color2){
+			fillRect_cont(0,0,SSD_WIDTH,SSD_HEIGHT,color1,color2);
+		} else {
+			setAddrWindow_cont(
+				0,
+				0,
+				SSD_WIDTH - 1,
+				SSD_HEIGHT - 1,
+				false
+			);
+			_pushColors_cont(color1, SSD_CGRAM);
+		}
+	#endif
 	closeTransaction();
 }
 
@@ -968,7 +1033,7 @@ fill RECT
 void SSD_13XX::fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color)
 {
 	startTransaction();
-	drawRectHard_cont(x, y, w, h, color,color,true);
+	drawRect_cont(x, y, w, h, color,color,true);
 	closeTransaction();
 }
 
@@ -1030,7 +1095,7 @@ void SSD_13XX::drawLine(int16_t x0, int16_t y0,int16_t x1, int16_t y1, uint16_t 
 	if (x1 >= _width) x1 = _width-1;
 	if (y1 >= _height) y1 = _height-1;
 	startTransaction();
-	drawHardLine_cont(x0,y0,x1,y1,color/*,200*/);
+	drawLine_cont(x0,y0,x1,y1,color/*,200*/);
 	closeTransaction();
 }
 
@@ -1050,7 +1115,7 @@ void SSD_13XX::drawRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t col
 	if (x + w >= _width) return;
 	if (y + h >= _height) return;
 	startTransaction();
-	drawRectHard_cont(x, y, w, h, color1,color2,filled);
+	drawRect_cont(x, y, w, h, color1,color2,filled);
 	closeTransaction();
 }
 
@@ -1480,7 +1545,7 @@ void SSD_13XX::fillRoundRect(int16_t x, int16_t y, int16_t w,int16_t h, int16_t 
 		return;
 	}
 	startTransaction();
-	drawRectHard_cont(x+radius, y, w-2*radius, h, color, color,1);
+	drawRect_cont(x+radius, y, w-2*radius, h, color, color,1);
 	//fillRect_cont(x+radius, y, w-2*radius, h, color, color);
 	fillCircle_cont_helper(x+w-radius-1, y+radius, radius, 1, h-2*radius-1, color);
 	fillCircle_cont_helper(x+radius    , y+radius, radius, 2, h-2*radius-1, color);
@@ -1491,10 +1556,10 @@ void SSD_13XX::fillRoundRect(int16_t x, int16_t y, int16_t w,int16_t h, int16_t 
 void SSD_13XX::drawQuad(int16_t x0, int16_t y0,int16_t x1, int16_t y1,int16_t x2, int16_t y2,int16_t x3, int16_t y3, uint16_t color)
 {
 	startTransaction();//open SPI comm
-	drawHardLine_cont(x0, y0, x1, y1, color/*,20*/);//low 1
-	drawHardLine_cont(x1, y1, x2, y2, color/*,20*/);//high 1
-	drawHardLine_cont(x2, y2, x3, y3, color/*,20*/);//high 2
-	drawHardLine_cont(x3, y3, x0, y0, color/*,20*/);//low 2
+	drawLine_cont(x0, y0, x1, y1, color/*,20*/);//low 1
+	drawLine_cont(x1, y1, x2, y2, color/*,20*/);//high 1
+	drawLine_cont(x2, y2, x3, y3, color/*,20*/);//high 2
+	drawLine_cont(x3, y3, x0, y0, color/*,20*/);//low 2
 	closeTransaction();
 }
 
@@ -1516,7 +1581,7 @@ void SSD_13XX::drawPolygon(int16_t x, int16_t y, uint8_t sides, int16_t diameter
 	uint8_t i;
 	startTransaction();
 	for (i = 0; i < sides; i++) {
-		drawHardLine_cont(
+		drawLine_cont(
 			x + (sin((i*rads + rot) * dtr) * diameter),
 			y + (cos((i*rads + rot) * dtr) * diameter),
 			x + (sin(((i+1)*rads + rot) * dtr) * diameter),
@@ -1553,9 +1618,9 @@ void SSD_13XX::drawTriangle(int16_t x0, int16_t y0,int16_t x1, int16_t y1,int16_
 	if (x0 > _width || x1 > _width || x2 > _width) return;
 	if (y0 > _height || y1 > _height || y2 > _height) return;
 	startTransaction();
-	drawHardLine_cont(x0, y0, x1, y1, color/*,800*/);
-	drawHardLine_cont(x1, y1, x2, y2, color/*,800*/);
-	drawHardLine_cont(x2, y2, x0, y0, color/*,800*/);
+	drawLine_cont(x0, y0, x1, y1, color/*,800*/);
+	drawLine_cont(x1, y1, x2, y2, color/*,800*/);
+	drawLine_cont(x2, y2, x0, y0, color/*,800*/);
 	closeTransaction();
 }
 
@@ -1830,14 +1895,13 @@ void SSD_13XX::pushColor(uint16_t color)
 	endTransaction();
 }
 
-int SSD_13XX::_dlyHelper(int16_t w,int16_t h,int maxDly)//in microseconds
-{
-	if (w <= 0 || h <= 0) return CMD_DLY_MIN;
-	return map(w*h,2,SSD_CGRAM,CMD_DLY_MIN,maxDly);
-}
+
 
 void SSD_13XX::drawIcon(int16_t x, int16_t y,const tIcon *icon,uint8_t scale,uint16_t f,uint16_t b,bool inverse)
 {
+	#if defined(_SSD_1351_REG_H_)
+		if (_portrait) swapVals(x,y);
+	#endif
 	#if defined(_FORCE_PROGMEM__)
 		const _smCharType * iconData 	= PROGMEM_read(&icon->data);
 		uint8_t		iWidth				= pgm_read_byte(&(icon->image_width));	//AVR ok
@@ -2258,15 +2322,14 @@ bool SSD_13XX::_renderSingleChar(const char c)
 			if (_textForeground != _textBackground) {//fill the space
 				if (_cursorX + borderRight >= _width) borderRight = _width - _cursorX;
 				//fillRect_cont(
-				drawRectHard_cont(
+				drawRect_cont(
 					_cursorX,
 					_cursorY,
 					borderRight + (_charSpacing * _textScaleX),
 					(_currentFont->font_height * _textScaleY),
 					_textBackground,
 					_textBackground,
-					1//,
-					//10
+					1
 				);
 			}
 			_cursorX += borderRight;
@@ -2276,15 +2339,14 @@ bool SSD_13XX::_renderSingleChar(const char c)
 			if (_textForeground != _textBackground) {//fill the space
 				if (_cursorY + borderRight >= _height) borderRight = _height - _cursorY;
 				//fillRect_cont(
-				drawRectHard_cont(
+				drawRect_cont(
 					_cursorY,
 					_cursorX,
 					borderRight,
 					(_currentFont->font_height * _textScaleX),
 					_textBackground,
 					_textBackground,
-					1//,
-					//10
+					1
 				);
 			}
 			_cursorY += borderRight;
@@ -2401,7 +2463,7 @@ void SSD_13XX::_glyphRender_unc(
 	int lineChecksum = 0;//part of the optimizer
 	//Fill background if needed.
 	//if (foreColor != backColor) fillRect_cont(x,y,((glyphWidth * scaleX) + (cspacing * scaleX)),(glyphHeight * scaleY),backColor,backColor);
-	if (foreColor != backColor) drawRectHard_cont(x,y,((glyphWidth * scaleX) + (cspacing * scaleX)),(glyphHeight * scaleY),backColor,backColor,1);
+	if (foreColor != backColor) drawRect_cont(x,y,((glyphWidth * scaleX) + (cspacing * scaleX)),(glyphHeight * scaleY),backColor,backColor,1);
 	//the main loop that will read all bytes of the glyph
 	while (currentByte < totalBytes){
 		//delay(1);
@@ -2425,7 +2487,7 @@ void SSD_13XX::_glyphRender_unc(
 					//do nothing
 				} else if (lineChecksum == glyphWidth){
 					//full line
-					//drawRectHard_cont(
+					//drawRect_cont(
 					fillRect_cont(
 							x,
 							tempYpos,
@@ -2492,7 +2554,7 @@ void SSD_13XX::_charLineRender(
 			} else {
 				if (refPixel) {
 						//fillRect_cont(
-						drawRectHard_cont(
+						drawRect_cont(
 						x,
 						y + (currentYposition * scaleY),
 						(endPix * scaleX),
@@ -2627,144 +2689,220 @@ fix this but is the only 'fast way' I found to acieve this!
 		}
 
 	#endif
+#endif
 /* ========================================================================
 					    Fast Common Graphic Primitives
    ========================================================================*/
 
-	void SSD_13XX::drawFastHLine_cont(int16_t x, int16_t y, int16_t w, uint16_t color)
-	{
-		/*
-		if (w > 1){ //use hardware
-			drawHardLine_cont(x, y, x + w - 1, y,color,50);
-		} else {
-			*/
-			setAddrWindow_cont(x, y, x + w - 1, y,true);
-			do { writedata16_cont(color); } while (--w > 0);
-		//}
-	}
+void SSD_13XX::drawFastHLine_cont(int16_t x, int16_t y, int16_t w, uint16_t color)
+{
+		if (w < 1) return;
+		setAddrWindow_cont(x, y, x + w - 1, y,true);
+		do { writedata16_cont(color); } while (--w > 0);
+}
 
-	void SSD_13XX::drawFastVLine_cont(int16_t x, int16_t y, int16_t h, uint16_t color)
-	{
-		/*
-		if (h > 1){ //use hardware
-			drawHardLine_cont(x, y, x, y + h - 1,color,50);
-		} else {
-			*/
-			setAddrWindow_cont(x, y, x, y + h - 1,true);
-			do { writedata16_cont(color); } while (--h > 0);
-		//}
-	}
+void SSD_13XX::drawFastVLine_cont(int16_t x, int16_t y, int16_t h, uint16_t color)
+{
+		if (h < 1) return;
+		setAddrWindow_cont(x, y, x, y + h - 1,true);
+		do { writedata16_cont(color); } while (--h > 0);
+}
 
-	void SSD_13XX::drawPixel_cont(int16_t x, int16_t y, uint16_t color)
-	{
+void SSD_13XX::drawPixel_cont(int16_t x, int16_t y, uint16_t color)
+{
 		setAddrWindow_cont(x, y, x + 1, y + 1,true);
 		writedata16_cont(color);
-	}
+}
 
 
-	void SSD_13XX::drawHardLine_cont(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color/*,int dly*/)
-	{
-		if (x0 < 0 || y0 < 0 || x1 < 0 || y1 < 0) return;
-		//if (x1 > _width || y1 > _height) return;
+void SSD_13XX::drawLine_cont(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color)
+{
+	if (x0 < 0 || y0 < 0 || x1 < 0 || y1 < 0) return;
+	#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
 		int dly = _dlyHelper(x1-x0,y1-y0,CMD_DLY_LINE);
 		uint8_t r,g,b;
 		_convertColor(color,r,g,b);
 		_sendLineData_cont(x0,y0,x1,y1);
 		_sendColor_cont(r,g,b);
 		delayMicroseconds(dly);
-	}
+	#else
+		if (y0 == y1) {
+			if (x1 > x0) {
+				drawFastHLine_cont(x0, y0, x1 - x0 + 1, color);
+			} else if (x1 < x0) {
+				drawFastHLine_cont(x1, y0, x0 - x1 + 1, color);
+			} else {
+				drawPixel_cont(x0, y0, color);
+			}
+			return;
+		} else if (x0 == x1) {
+			if (y1 > y0) {
+				drawFastVLine_cont(x0, y0, y1 - y0 + 1, color);
+			} else {
+				drawFastVLine_cont(x0, y1, y0 - y1 + 1, color);
+			}		
+			return;
+		}
 
+		bool steep = abs(y1 - y0) > abs(x1 - x0);
+		if (steep) {swapVals(x0, y0); swapVals(x1, y1);}
+		if (x0 > x1) {swapVals(x0, x1); swapVals(y0, y1);}
+
+		int16_t dx, dy;
+		dx = x1 - x0;
+		dy = abs(y1 - y0);
+
+		int16_t err = dx / 2;
+		int16_t ystep;
+
+		if (y0 < y1) {
+			ystep = 1;
+		} else {
+			ystep = -1;
+		}
+
+		int16_t xbegin = x0;
+		if (steep) {
+			for (; x0<=x1; x0++) {
+				err -= dy;
+				if (err < 0) {
+					int16_t len = x0 - xbegin;
+					if (len) {
+						drawFastVLine_cont(y0, xbegin, len + 1, color);
+					} else {
+						drawPixel_cont(y0, x0, color);
+					}
+					xbegin = x0 + 1;
+					y0 += ystep;
+					err += dx;
+				}
+				#if defined(ESP8266)   	
+					yield(); 	
+				#endif
+			}
+			if (x0 > xbegin + 1) drawFastVLine_cont(y0, xbegin, x0 - xbegin, color);
+		} else {
+			for (; x0<=x1; x0++) {
+				err -= dy;
+				if (err < 0) {
+					int16_t len = x0 - xbegin;
+					if (len) {
+						drawFastHLine_cont(xbegin, y0, len + 1, color);
+					} else {
+						drawPixel_cont(x0, y0, color);
+					}
+					xbegin = x0 + 1;
+					y0 += ystep;
+					err += dx;
+				}
+				#if defined(ESP8266)   	
+					yield(); 	
+				#endif
+			}
+			if (x0 > xbegin + 1) drawFastHLine_cont(xbegin, y0, x0 - xbegin, color);
+		}
+	#endif
+}
+
+
+#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
+	
 	void SSD_13XX::_sendLineData_cont(int16_t x0,int16_t y0,int16_t x1,int16_t y1)
 	{
 		if (_portrait){
 			swapVals(x0,y0);
 			swapVals(x1,y1);
 		}
-		if (x1 > _width || y1 > _height) return;
 		writecommand_cont(CMD_DRAWLINE);
-		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
-			writecommand_cont(x0 & 0xFF);
-			writecommand_cont(y0 & 0xFF);
-			writecommand_cont(x1 & 0xFF);
-			writecommand_cont(y1 & 0xFF);
-		#else
-			writedata8_cont(x0 & 0xFF);
-			writedata8_cont(y0 & 0xFF);
-			writedata8_cont(x1 & 0xFF);
-			writedata8_cont(y1 & 0xFF);
-		#endif
+		writecommand_cont(x0 & 0xFF);
+		writecommand_cont(y0 & 0xFF);
+		writecommand_cont(x1 & 0xFF);
+		writecommand_cont(y1 & 0xFF);
 	}
-
-	//+++++++++OK
+	
 	void SSD_13XX::_sendColor_cont(uint8_t r,uint8_t g,uint8_t b)
 	{
-		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
-			writecommand_cont(r);writecommand_cont(g);writecommand_cont(b);
-		#else
-			writedata8_cont(r);writedata8_cont(g);writedata8_cont(b);
-		#endif
+		writecommand_cont(r);writecommand_cont(g);writecommand_cont(b);
 	}
-
-	//+++++++++OK
+	
 	void SSD_13XX::_sendColor_cont(uint16_t color)
 	{
 		uint8_t r,g,b;
 		_convertColor(color,r,g,b);
-		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
-			writecommand_cont(r);writecommand_cont(g);writecommand_cont(b);
-		#else
-			writedata8_cont(r);writedata8_cont(g);writedata8_cont(b);
-		#endif
+		writecommand_cont(r);writecommand_cont(g);writecommand_cont(b);
 	}
-
-#endif
-
-	//+++++++++OK
+	
 	void SSD_13XX::_fillUtility(bool filling)
 	{
 		if (filling != _filled){
 			_filled = filling;
 			writecommand_cont(CMD_FILL);
-		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
 			if (_filled){
 				writecommand_cont(0x01);
 			} else {
 				writecommand_cont(0x00);
 			}
-		#else
-			if (_filled){
-				writedata8_cont(0x01);
-			} else {
-				writedata8_cont(0x00);
-			}
-		#endif
 		}
 	}
 
-	//+++++++++OK
-	void SSD_13XX::drawRectHard_cont(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color1,uint16_t color2, bool filled)
+	int SSD_13XX::_dlyHelper(int16_t w,int16_t h,int maxDly)//in microseconds
 	{
-		if (w < 2 && h < 2) {
-			drawPixel_cont(x,y,color1);
-			return;
-		}
-		if (_portrait){
-			swapVals(x, y);
-			swapVals(w, h);
-		}
-		if (x >= _width || y >= _height) return;
-		int dly = _dlyHelper(w,h,CMD_DLY_FILL);
+		if (w <= 0 || h <= 0) return CMD_DLY_MIN;
+		return map(w*h,2,SSD_CGRAM,CMD_DLY_MIN,maxDly);
+	}
 
-		uint8_t r1,g1,b1,r2,g2,b2;
-		_convertColor(color1,r1,g1,b1);
-		if (color1 != color2){
-			_convertColor(color2,r2,g2,b2);
+	void SSD_13XX::_convertColor(uint16_t color,uint8_t &r,uint8_t &g,uint8_t &b)
+	{
+		r = (uint8_t)((color >> 11) << 1);
+		g =	(uint8_t)((color >> 5) & 0x3F);
+		b = (uint8_t)((color << 1) & 0x3F);
+	}
+		
+	/*
+	void SSD_13XX::_convertColor(uint16_t color,uint8_t &r,uint8_t &g,uint8_t &b)
+	{
+		if (_colorDepth){
+			//16 bit
+			r = (uint8_t)((color >> 11) << 1);
+			g =	(uint8_t)((color >> 5) & 0x3F);
+			b = (uint8_t)((color << 1) & 0x3F);
 		} else {
-			r2 = r1;g2 = g1;b2 = b1;
+			//8 bit
+			r = (uint8_t)((color >> 5) & 0x07);
+			r |= r << 3;
+			g = (uint8_t)((color >> 2) & 0x07);
+			g |= g << 3;
+			b = (uint8_t)(color & 0x03);
+			b |= (b << 4) | (b << 2);
 		}
-		_fillUtility(filled);
-		writecommand_cont(CMD_DRAWRECT);
-		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
+	}
+	*/
+#endif
+
+	//+++++++++OK
+	void SSD_13XX::drawRect_cont(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color1,uint16_t color2, bool filled)
+	{
+		#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
+			if (w < 2 && h < 2) {
+				drawPixel_cont(x,y,color1);
+				return;
+			}
+			if (_portrait){
+				swapVals(x, y);
+				swapVals(w, h);
+			}
+			if (x >= _width || y >= _height) return;
+			int dly = _dlyHelper(w,h,CMD_DLY_FILL);
+
+			uint8_t r1,g1,b1,r2,g2,b2;
+			_convertColor(color1,r1,g1,b1);
+			if (color1 != color2){
+				_convertColor(color2,r2,g2,b2);
+			} else {
+				r2 = r1;g2 = g1;b2 = b1;
+			}
+			_fillUtility(filled);
+			writecommand_cont(CMD_DRAWRECT);
 			writecommand_cont(x & 0xFF);
 			writecommand_cont(y & 0xFF);
 			if ((x + w - 1) >= SSD_WIDTH) {
@@ -2777,33 +2915,29 @@ fix this but is the only 'fast way' I found to acieve this!
 			} else {
 				writecommand_cont(((y + h) - 1) & 0xFF);
 			}
+			_sendColor_cont(r1,g1,b1);
+			_sendColor_cont(r2,g2,b2);
+			delayMicroseconds(dly);
 		#else
-			writedata8_cont(x & 0xFF);
-			writedata8_cont(y & 0xFF);
-			if ((x + w - 1) >= SSD_WIDTH) {
-				writedata8_cont((SSD_WIDTH-1) & 0xFF);
+			if (filled){
+				fillRect_cont(x,y,w,h,color1,color2);
 			} else {
-				writedata8_cont(((x + w) - 1) & 0xFF);
-			}
-			if ((y+h-1)>=SSD_HEIGHT) {
-				writedata8_cont((SSD_HEIGHT-1) & 0xFF);
-			} else {
-				writedata8_cont(((y + h) - 1) & 0xFF);
+				//TODO Grandient? (and color2)
+				drawFastHLine_cont(x, y, w, color1);
+				drawFastHLine_cont(x, (y+h)-1, w, color1);
+				drawFastVLine_cont(x, y, h, color1);
+				drawFastVLine_cont((x+w)-1, y, h, color1);	
 			}
 		#endif
-		_sendColor_cont(r1,g1,b1);
-		_sendColor_cont(r2,g2,b2);
-		delayMicroseconds(dly);
 	}
 
 	void SSD_13XX::setAddrWindow_cont(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1,bool rotFix)
 	{
-
 		if (rotFix && _portrait){
 			swapVals(x0, y0);
 			swapVals(x1, y1);
 		}
-		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
+		#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
 			writecommand_cont(CMD_SETCOLUMN); //Column
 			writecommand_cont(x0); writecommand_cont(x1);
 			writecommand_cont(CMD_SETROW); //Page
@@ -2813,6 +2947,8 @@ fix this but is the only 'fast way' I found to acieve this!
 			writedata8_cont(x0); writedata8_cont(x1);
 			writecommand_cont(CMD_SETROW); //Page
 			writedata8_cont(y0); writedata8_cont(y1);
+			
+			writecommand_cont(CMD_WRITERAM);
 		#endif
 	}
 
@@ -2833,32 +2969,6 @@ fix this but is the only 'fast way' I found to acieve this!
 		return len;
 	}
 
-	void SSD_13XX::_convertColor(uint16_t color,uint8_t &r,uint8_t &g,uint8_t &b)
-	{
-		r = (uint8_t)((color >> 11) << 1);
-		g =	(uint8_t)((color >> 5) & 0x3F);
-		b = (uint8_t)((color << 1) & 0x3F);
-	}
-
-	/*
-	void SSD_13XX::_convertColor(uint16_t color,uint8_t &r,uint8_t &g,uint8_t &b)
-	{
-		if (_colorDepth){
-			//16 bit
-			r = (uint8_t)((color >> 11) << 1);
-			g =	(uint8_t)((color >> 5) & 0x3F);
-			b = (uint8_t)((color << 1) & 0x3F);
-		} else {
-			//8 bit
-			r = (uint8_t)((color >> 5) & 0x07);
-			r |= r << 3;
-			g = (uint8_t)((color >> 2) & 0x07);
-			g |= g << 3;
-			b = (uint8_t)(color & 0x03);
-			b |= (b << 4) | (b << 2);
-		}
-	}
-	*/
 
 	void SSD_13XX::closeTransaction(void)
 	{

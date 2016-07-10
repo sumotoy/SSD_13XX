@@ -17,8 +17,9 @@
     You should have received a copy of the GNU General Public License
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 	---------------------------------------------------------------------------------------
-	SSD1332 Registers
+	SSD1332 Registers set
 ===========================================================================================*/
+#define _SSD_USECMDASDATA 1
 //registers-----------------------
 static const uint8_t CMD_NOP     			= 0xE3;//SSD1332
 static const uint8_t CMD_DRAWLINE 			= 0x21;//SSD1332

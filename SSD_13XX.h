@@ -52,6 +52,21 @@
 	Icon Render              										1404	1312
 	----------------------------------------------------------------------------
 	Versions:            	 1st	hrdw	r11		remap	adly	ldly
+Screen fill              11952
+Text                     1988
+Text2                    11004
+Lines                    12550
+Horiz/Vert Lines         5141
+Arc                      178365
+Rectangles (outline)     4108
+Rectangles (filled)      91168
+Circles (filled)         21413
+Circles (outline)        21863
+Triangles (outline)      4023
+Triangles (filled)       30205
+Rounded rects (outline)  7010
+Rounded rects (filled)   99127
+Icon Render              1754
 */
 
 #ifndef _SSD_13XXLIB_H_
@@ -284,13 +299,11 @@ class SSD_13XX : public Print {
 			SPI.transfer(c);
 		}
 
-
 		void spiwrite16(uint16_t c)
 		__attribute__((always_inline)) {
 			//SPI.transfer(c >> 8); SPI.transfer(c);
 			SPI.transfer16(c);
 		}
-
 
 		void enableCommandStream(void)
 		__attribute__((always_inline)) {
@@ -497,7 +510,6 @@ class SSD_13XX : public Print {
 			#endif
 		}
 
-
 		void spiwrite16(uint16_t c)
 		__attribute__((always_inline)) {
 			#if defined(_ESP8266_SPIFAST)
@@ -543,7 +555,6 @@ class SSD_13XX : public Print {
 			#endif
 		}
 
-
 		void endTransaction(void)
 		__attribute__((always_inline)) {
 			#if defined(SPI_HAS_TRANSACTION)
@@ -560,7 +571,7 @@ class SSD_13XX : public Print {
 			#endif
 		}
 
-/* ----------------- UNCKNOWN (Legacy) ------------------------*/
+/* ----------------- UNKNOWN (Legacy) ------------------------*/
 	#else
 		uint8_t 			_cs,_dc;
 
@@ -592,7 +603,6 @@ class SSD_13XX : public Print {
 				digitalWrite(_cs,LOW);
 		}
 
-
 		void endTransaction(void)
 		__attribute__((always_inline)) {
 			#if defined(SPI_HAS_TRANSACTION)
@@ -609,7 +619,7 @@ class SSD_13XX : public Print {
 
  private:
  
-	bool					_colorDepth;
+	uint8_t					_colorDepth;
 	int						_spaceCharWidth;
 	const tFont   		*	_currentFont;
 	uint8_t					_charSpacing;
@@ -644,118 +654,28 @@ class SSD_13XX : public Print {
 	-------------------- Common low level commands ------------------------
 	Teensy 3.x uses different functions, This are for all the rest of MCU's
    ========================================================================*/
-			#if !defined(__MK20DX128__) && !defined(__MK20DX256__) && !defined(__MK64FX512__) && !defined(__MK66FX1M0__)
-				void writecommand_cont(const uint8_t c)
-				__attribute__((always_inline)) { enableCommandStream(); spiwrite(c); }
+		#if !defined(__MK20DX128__) && !defined(__MK20DX256__) && !defined(__MK64FX512__) && !defined(__MK66FX1M0__)
+			void writecommand_cont(const uint8_t c)
+			__attribute__((always_inline)) { enableCommandStream(); spiwrite(c); }
 
-				void writecommand16_cont(uint16_t c)
-				__attribute__((always_inline)) { enableCommandStream(); spiwrite16(c); }
+			void writecommand16_cont(uint16_t c)
+			__attribute__((always_inline)) { enableCommandStream(); spiwrite16(c); }
 
-				void writedata8_cont(uint8_t c)
-				__attribute__((always_inline)) { enableDataStream(); spiwrite(c); }
+			void writedata8_cont(uint8_t c)
+			__attribute__((always_inline)) { enableDataStream(); spiwrite(c); }
 
-				void writedata16_cont(uint16_t d)
-				__attribute__((always_inline)) { enableDataStream(); spiwrite16(d); }
+			void writedata16_cont(uint16_t d)
+			__attribute__((always_inline)) { enableDataStream(); spiwrite16(d); }
 
-				void writecommand_last(const uint8_t c)
-				__attribute__((always_inline)) { enableCommandStream(); spiwrite(c); disableCS(); }
+			void writecommand_last(const uint8_t c)
+			__attribute__((always_inline)) { enableCommandStream(); spiwrite(c); disableCS(); }
 
-				void writedata8_last(uint8_t c)
-				__attribute__((always_inline)) { enableDataStream(); spiwrite(c); disableCS(); }
+			void writedata8_last(uint8_t c)
+			__attribute__((always_inline)) { enableDataStream(); spiwrite(c); disableCS(); }
 
-				void writedata16_last(uint16_t d)
-				__attribute__((always_inline)) { enableDataStream(); spiwrite16(d); disableCS(); }
-			#endif
-/* ========================================================================
-					    Fast Common Graphic Primitives
-   ========================================================================*/
-
-		//+++++++++OK
-		void drawFastHLine_cont(int16_t x, int16_t y, int16_t w, uint16_t color)
-		__attribute__((always_inline)) {
-			if (w < 1) return;
-			/*
-			if (w > 10){ //use hardware
-				drawHardLine_cont(x, y, x + w - 1, y,color,30);
-			} else {
-			*/
-				setAddrWindow_cont(x, y, x + w - 1, y,true);
-				do { writedata16_cont(color); } while (--w > 0);
-			//}
-		}
-
-		//+++++++++OK
-		void drawFastVLine_cont(int16_t x, int16_t y, int16_t h, uint16_t color)
-		__attribute__((always_inline)) {
-			if (h < 1) return;
-			/*
-			if (h > 10){ //use hardware
-				drawHardLine_cont(x, y, x, y + h - 1, color, 30);
-			} else {
-			*/
-				setAddrWindow_cont(x, y, x, y + h - 1,true);
-				do { writedata16_cont(color); } while (--h > 0);
-			//}
-		}
-
-		void drawPixel_cont(int16_t x, int16_t y, uint16_t color)
-		__attribute__((always_inline)) {
-			setAddrWindow_cont(x, y, x + 1, y + 1,true);
-			writedata16_cont(color);
-		}
-
-		void drawHardLine_cont(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color/*,int dly=CMD_DLY_LINE*/)
-			__attribute__((always_inline)) {
-				if (x0 < 0 || y0 < 0 || x1 < 0 || y1 < 0) return;
-				int dly = _dlyHelper(x1-x0,y1-y0,CMD_DLY_LINE);
-				uint8_t r,g,b;
-				_convertColor(color,r,g,b);
-				_sendLineData_cont(x0,y0,x1,y1);
-				_sendColor_cont(r,g,b);
-				delayMicroseconds(dly);
-		}
-
-	void _sendLineData_cont(int16_t x0,int16_t y0,int16_t x1,int16_t y1)
-	__attribute__((always_inline)) {
-		if (_portrait){
-			swapVals(x0,y0);
-			swapVals(x1,y1);
-		}
-		writecommand_cont(CMD_DRAWLINE);
-		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
-			writecommand_cont(x0 & 0xFF);
-			writecommand_cont(y0 & 0xFF);
-			writecommand_cont(x1 & 0xFF);
-			writecommand_cont(y1 & 0xFF);
-		#else
-			writedata8_cont(x0 & 0xFF);
-			writedata8_cont(y0 & 0xFF);
-			writedata8_cont(x1 & 0xFF);
-			writedata8_cont(y1 & 0xFF);
+			void writedata16_last(uint16_t d)
+			__attribute__((always_inline)) { enableDataStream(); spiwrite16(d); disableCS(); }
 		#endif
-	}
-
-	//+++++++++OK
-	void _sendColor_cont(uint8_t r,uint8_t g,uint8_t b)
-	__attribute__((always_inline)) {
-		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
-			writecommand_cont(r);writecommand_cont(g);writecommand_cont(b);
-		#else
-			writedata8_cont(r);writedata8_cont(g);writedata8_cont(b);
-		#endif
-	}
-
-	//+++++++++OK
-	void _sendColor_cont(uint16_t color)
-	__attribute__((always_inline)) {
-		uint8_t r,g,b;
-		_convertColor(color,r,g,b);
-		#if defined(_SSD_1331_96X64_H) || defined(_SSD_1332_96X64_H)
-			writecommand_cont(r);writecommand_cont(g);writecommand_cont(b);
-		#else
-			writedata8_cont(r);writedata8_cont(g);writedata8_cont(b);
-		#endif
-	}
 
 	#endif
 
@@ -775,14 +695,24 @@ class SSD_13XX : public Print {
 	float 		sinDeg_helper(float angle);
 	bool 		boundaryCheck(int16_t xw,int16_t yh);
 	int16_t 	sizeCheck(int16_t origin,int16_t len,int16_t maxVal);
-	void 		setAddrWindow_cont(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1,bool rotFix = true);
-	void 		setAddrWindow_cont(uint16_t x, uint16_t y);
 	void 		setRegister_cont(const uint8_t cmd,uint8_t data);
+	#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
 	void 		_fillUtility(bool filling);
 	int			_dlyHelper(int16_t w,int16_t h,int maxDly);
 	void 		_convertColor(uint16_t color,uint8_t &r,uint8_t &g,uint8_t &b);
-	void 		drawRectHard_cont(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color1,uint16_t color2, bool filled);
-	
+	void 		_sendColor_cont(uint8_t r,uint8_t g,uint8_t b);
+	void 		_sendColor_cont(uint16_t color);
+	void 		_sendLineData_cont(int16_t x0,int16_t y0,int16_t x1,int16_t y1);
+	#endif
+	void 		setAddrWindow_cont(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1,bool rotFix = true);
+	void 		setAddrWindow_cont(uint16_t x, uint16_t y);
+	void 		drawFastHLine_cont(int16_t x, int16_t y, int16_t w, uint16_t color);
+	void 		drawFastVLine_cont(int16_t x, int16_t y, int16_t h, uint16_t color);
+	void 		drawPixel_cont(int16_t x, int16_t y, uint16_t color);
+	void 		drawLine_cont(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color);
+	void 		drawRect_cont(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color1,uint16_t color2, bool filled);
+	void 		_pushColors_cont(uint16_t data,uint32_t times);
+
 	#if defined(_SSD_SIZEOPTIMIZER)
 		#if !defined(__MK20DX128__) && !defined(__MK20DX256__) && !defined(__MK64FX512__) && !defined(__MK66FX1M0__)
 			void 		writecommand_cont(const uint8_t c);
@@ -792,16 +722,7 @@ class SSD_13XX : public Print {
 			void 		writecommand_last(const uint8_t c);
 			void 		writedata8_last(uint8_t c);
 			void 		writedata16_last(uint16_t d);
-		#endif
-		void 		_sendColor_cont(uint8_t r,uint8_t g,uint8_t b);
-		void 		_sendColor_cont(uint16_t color);
-		void 		drawFastHLine_cont(int16_t x, int16_t y, int16_t w, uint16_t color);
-		void 		drawFastVLine_cont(int16_t x, int16_t y, int16_t h, uint16_t color);
-		void 		drawPixel_cont(int16_t x, int16_t y, uint16_t color);
-		void 		_sendLineData_cont(int16_t x0,int16_t y0,int16_t x1,int16_t y1);
-		void 		drawHardLine_cont(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color/*,int dly=CMD_DLY_LINE*/);
-		//void 		_fillUtility(bool filling);
-
+		#endif	
 	#endif
 
 	//LPGO
@@ -809,7 +730,7 @@ class SSD_13XX : public Print {
 	int						_getCharCode(uint8_t ch);
 	void					_textWrite(const char* buffer, uint16_t len);
 	bool					_renderSingleChar(const char c);
-	void 					_pushColors_cont(uint16_t data,uint32_t times);
+	
 	void					_glyphRender_unc(
 											const _smCharType * charGlyp,
 											int16_t 	x,
