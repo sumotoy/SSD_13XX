@@ -94,7 +94,7 @@ Of course some oled has just SPI exposed but some can be configured for parallel
 - scl, sclk -> SCLK
 - sda, sdin -> MOSI
 - DC,RS ->DC pin on MCU
-- some oled has WR, RD. Do NOT connect
+- some oled has WR, RD. Leave floating...
 - some oled has D0...D7. Most of the times D0 and D1 are used for SPI, connect D2...D7 to GND or will be unstable!
 - VIN. Most oled support 5v, internally they have regulators, but follow specifications of your particular oled!
 - 3v3. This is 99% of the times an OUT! So do not use it.<br>
