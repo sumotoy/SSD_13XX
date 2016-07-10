@@ -35,9 +35,11 @@ Es. <code>#include "../_display/SSD_1331_96x64.h"</code>
 <b>Driver that will never supported:</b><br>
  - SSD_1306: This device need a completely different library since it have no internal framebuffer.<br>
 
+***
 <b>CPU Supported:</b><br>
  - Teensy 3.0, 3.1, 3.2, 3.4, 3.5, LC
- - Teensy 2.0 and variant, any Arduino 8 bit
+ - Teensy 2.0 and variant
+ - Any AVR 8 bit (UNO, etc.)
  - Arduino DUE
  - ESP8266
  - SPARK (next versions)
@@ -46,6 +48,7 @@ Es. <code>#include "../_display/SSD_1331_96x64.h"</code>
 <b>Note:</b> I currently will not support Arduino Zero, it's currently poor documented and it cost a fortune, I suggest a Teensy that is much cheaper, more featured and smaller!<br>
 However, this is open source an released with GNU V3 so you can fork library and add Zero support yourself as you respect the GNU licence and leave intact any comment.<br>
 
+***
 <b>Background:</b><br>
 I got my first SSD_1331 on Ebay, find a library compatible at Adafruit but I was extremely disappointed about performances/features and bugs, so I decided to write a new one from scratch based on my popular TFT_ILI9163C. Since this devices are very similar I have decided to build up an unique library.<br>
 I have 2 old libraries here on github, but digging inside datasheet I discover that I can get much more by rewrote almost everithing. As result I got all chip features enabled and it's probably the faster driver around, much more than adafruit and works with all features at any screen rotation by using all the time his hardware accellerated primitives<br>
