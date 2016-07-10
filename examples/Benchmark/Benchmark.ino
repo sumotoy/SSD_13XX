@@ -1,6 +1,6 @@
 /*
       A benchmark Test, on Teensy it will also check if pin you choose are legal
-	  Version 1.1 (better screenFill test, test in rotation 0...3, fixed test lines results)
+	  Version 1.11 (better screenFill test, test in rotation 0...3, fixed test lines results)
 */
 
 #include <SPI.h>
@@ -12,7 +12,6 @@
 #define F(string_literal) string_literal
 #endif
 
-//#define _LEGACYSPEEDTEST 1
 
 uint8_t errorCode = 0;
 #define _dlyBetweenTests	500
@@ -46,8 +45,8 @@ void setup() {
   Serial.begin(38400);
   long unsigned debug_start = millis ();
   while (!Serial && ((millis () - debug_start) <= 5000)) ;
-  tft.begin(false);
-
+  tft.begin();
+  tft.setBrightness(15);
 
   //the following it's mainly for Teensy
   //it will help you to understand if you have choosed the
@@ -58,7 +57,7 @@ void setup() {
     if (bitRead(errorCode, 0)) Serial.print("MOSI or SCLK pin mismach!\n");
     if (bitRead(errorCode, 1)) Serial.print("CS or DC pin mismach!\n");
   } else {
-    Serial.println(F("Benchmark Sketch V1.1"));
+    Serial.println(F("Benchmark Sketch V1.11"));
   }
 }
 
@@ -103,14 +102,14 @@ void loop(void) {
       delay(_dlyBetweenTests);
 
       Serial.print(F("Circles (filled)         "));
-	  #if defined(_LEGACYSPEEDTEST)
+	  #if (SSD_HEIGHT > 64)
       Serial.println(testFilledCircles(10, MAGENTA));
 	  #else
 	  Serial.println(testFilledCircles(5, MAGENTA));
 	  #endif
 
       Serial.print(F("Circles (outline)        "));
-	  #if defined(_LEGACYSPEEDTEST)
+	  #if (SSD_HEIGHT > 64)
       Serial.println(testCircles(10, WHITE));
 	  #else
 	  Serial.println(testCircles(5, WHITE));
@@ -166,19 +165,19 @@ unsigned long testText() {
   tft.println("Hello World!");
   tft.setTextColor(YELLOW);
   tft.setTextScale(2);
-  #if defined(_LEGACYSPEEDTEST)
+  #if (SSD_HEIGHT > 64)
   tft.println(1234.56);
   #else
   tft.println(1234.5);
   #endif
   tft.setTextColor(RED);
-  #if defined(_LEGACYSPEEDTEST)
+  #if (SSD_HEIGHT > 64)
   tft.setTextScale(3);
   #else
   tft.setTextScale(2);
   #endif
   tft.println(0xDEAD, HEX);
-  #if defined(_LEGACYSPEEDTEST)
+  #if (SSD_HEIGHT > 64)
   tft.println();
   tft.setTextColor(GREEN);
   tft.setTextScale(4);
