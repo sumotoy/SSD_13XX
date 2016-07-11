@@ -3,7 +3,7 @@ A very fast and full featured driver for <b>Solomon Systech SSD1331, SSD1332, SS
 I have other 2 libraries here in github but have some issues and are quite old, this will replace both.<br>
 
 <b>Current Version:</b><br>
- - 1.0r2: SSD1331/SSD1332/SSD1351 tested only with various Teensy's. If not work with other CPU please report only, I NEVER tested the code with other CPU's so I expect this, but remember that is a preview and things gonna change soon.
+ - 1.0r2: SSD1331/SSD1332/SSD1351 tested only with various Teensy's and ESP8266 (Have to set SPI at 79.999.999!). If not work with other CPU please report only, I NEVER tested the code with other CPU's so I expect this, but remember that is a preview and things gonna change soon.
 
 <b>Driver description (what I should choose?):</b><br>
 * <b>SSD1331</b> is a full featured driver for 96x64 oled with a lot of useful registers and an hardware accellerated standalone scroll that I never seen in other drivers. This controller is currently supported.<br>
