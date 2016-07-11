@@ -32,7 +32,7 @@ uint8_t errorCode = 0;
   MOSI:D7
 */
 #if defined(ESP8266)
-#define __CS1   16  //(D0)
+#define __CS1   4  //GPIO4 or GPIO2
 #define __DC    5   //(D1)
 #else
 #define __CS1 	10

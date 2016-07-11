@@ -2,7 +2,7 @@
 #include <SSD_13XX.h>
 
 
-#define __CS  16  //(D0)
+#define __CS  4  //GPIO4 or GPIO2
 #define __DC  5   //(D1)
 
 /*

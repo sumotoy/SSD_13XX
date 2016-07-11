@@ -14,7 +14,7 @@
 	#if defined(ESP8266)
 		#define _smCharType	uint8_t
 		#if defined(SPI_HAS_TRANSACTION)
-			static const uint32_t _common_max_SPI_speed 	= 80000000;
+			static const uint32_t _common_max_SPI_speed 	= 7999999;
 		#endif
 		#define _SPI_MULTITRANSFER	//enable burst multy byte transfer
 	#elif defined(__AVR__)

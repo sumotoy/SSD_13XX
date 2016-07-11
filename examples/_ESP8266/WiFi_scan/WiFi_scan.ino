@@ -7,7 +7,7 @@
 #include <SSD_13XX.h>
 #include <ESP8266WiFi.h>
 
-#define __CS  16  //(D0)
+#define __CS  4  //GPIO4 or GPIO2
 #define __DC  5   //(D1)
 /*
  SCLK:D5

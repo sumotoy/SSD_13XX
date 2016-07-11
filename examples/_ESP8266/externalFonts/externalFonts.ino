@@ -8,7 +8,7 @@ and some new text commands
 #include "_fonts/unborn_small.c"
 
 
-#define __CS  16  //(D0)
+#define __CS  4  //GPIO4 or GPIO2
 #define __DC  2   //(D1)
 
 SSD_13XX tft = SSD_13XX(__CS, __DC);//we dont use rst, tie reset pin to 3v3

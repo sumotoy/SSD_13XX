@@ -1,6 +1,6 @@
 /*
 	SSD_13XX - A fast SPI driver for several Solomon Systech SSD13xx series driver
-	Version: 1.0r1, preview release, tested ONLY with Teensy's!
+	Version: 1.0r3, beta release
 
 	https://github.com/sumotoy/SSD_13XX
 

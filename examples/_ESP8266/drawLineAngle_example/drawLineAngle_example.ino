@@ -7,7 +7,7 @@ that let you draw easily needle gauges at any angle
 #include <SPI.h>
 #include <SSD_13XX.h>
 
-#define __CS_TFT        16  //(D0)
+#define __CS_TFT        4  //GPIO4 or GPIO2
 #define __DC_TFT        2   //(D1)
 
 
