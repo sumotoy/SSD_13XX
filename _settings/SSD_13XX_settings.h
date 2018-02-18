@@ -28,10 +28,18 @@ You must select just ONE and comment the others.
 Default: #include "../_display/SSD_1331_96x64.h"
 (uncomment just one below...)
 ----------------------------------------------------------------------------------*/
+#if defined SSD_1331_96x64_DISPLAY
 	#include "../_display/SSD_1331_96x64.h"
-	//#include "../_display/SSD_1331_REDPCB.h"
-	//#include "../_display/SSD_1332_96x64.h"
-	//#include "../_display/SSD_1351_128x128.h"
+#elif defined SSD_1331_REDPCB_DISPLAY
+	#include "../_display/SSD_1331_REDPCB.h"
+#elif defined SSD_1332_96x64_DISPLAY
+	#include "../_display/SSD_1332_96x64.h"
+#elif defined SSD_1351_128x128_DISPLAY
+	#include "../_display/SSD_1351_128x128.h"
+#else
+	#include "../_display/SSD_1331_96x64.h"
+	#pragma message("You need to specify your display by defining one of the following macros: SSD_1331_96x64_DISPLAY, SSD_1331_REDPCB_DISPLAY, SSD_1332_96x64_DISPLAY, SSD_1351_128x128_DISPLAY")
+#endif
 /*--------------------------------------------------------------------------------
 - Size Reducing (decrease slight performances) -
 Ignored for Teensy 3.x, DUE
