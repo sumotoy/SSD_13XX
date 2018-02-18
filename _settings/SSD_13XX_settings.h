@@ -37,7 +37,8 @@ Default: #include "../_display/SSD_1331_96x64.h"
 #elif defined SSD_1351_128x128_DISPLAY
 	#include "../_display/SSD_1351_128x128.h"
 #else
-	#error You need to specify your display by defining one of the following macros: SSD_1331_96x64_DISPLAY, SSD_1331_REDPCB_DISPLAY, SSD_1332_96x64_DISPLAY, SSD_1351_128x128_DISPLAY
+	#include "../_display/SSD_1331_96x64.h"
+	#pragma message("You need to specify your display by defining one of the following macros: SSD_1331_96x64_DISPLAY, SSD_1331_REDPCB_DISPLAY, SSD_1332_96x64_DISPLAY, SSD_1351_128x128_DISPLAY")
 #endif
 /*--------------------------------------------------------------------------------
 - Size Reducing (decrease slight performances) -
