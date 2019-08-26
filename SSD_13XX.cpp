@@ -428,7 +428,7 @@ void SSD_13XX::changeMode(const enum SSD_13XX_modes m)
 		startTransaction();
 		switch(m){
 			case NORMAL:
-				if (_currentMode == 6) {//was in off display?
+				if (_currentMode == 6 || _currentMode ==7) {//was in OFF or DIM display?
 					writecommand_cont(CMD_DISPLAYON);
 				}
 				/*
