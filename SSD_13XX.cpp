@@ -495,12 +495,12 @@ void SSD_13XX::changeMode(const enum SSD_13XX_modes m)
 				writecommand_cont(CMD_DISPLAYOFF);
 				_currentMode = 6;
 			break;
-			/*
+			
 			case DISP_DIM:
 				writecommand_cont(CMD_DISPLAYDIM);
 				_currentMode = 7;
 			break;
-			*/
+			
 			case PROTECT:
 				#if defined(_SSD_1331_REG_H_) || defined(_SSD_1351_REG_H_)
 				setRegister_cont(CMD_CMDLOCK,0x16);//lock
