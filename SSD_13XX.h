@@ -215,7 +215,7 @@ class SSD_13XX : public Print {
 	void		setCursor(int16_t x,int16_t y,enum SSD_13XX_centerMode c=NORM);
 	void		getCursor(int16_t &x,int16_t &y);
 	//------------------------------- SCROLL ----------------------------------------------------
-	void 		defineScrollArea(int16_t a, int16_t b, int16_t c, int16_t d, uint8_t e);
+	void 		defineScrollArea(int8_t a, int8_t b, int8_t c, int8_t d, uint8_t e);
 	boolean		scroll(bool active);
 	#if !defined (SPI_HAS_TRANSACTION)
 	void 		setBitrate(uint32_t n);//will be deprecated
