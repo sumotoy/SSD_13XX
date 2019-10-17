@@ -428,7 +428,7 @@ void SSD_13XX::changeMode(const enum SSD_13XX_modes m)
 		startTransaction();
 		switch(m){
 			case NORMAL:
-				if (_currentMode == 6) {//was in off display?
+				if (_currentMode == 6 || _currentMode ==7) {//was in OFF or DIM display?
 					writecommand_cont(CMD_DISPLAYON);
 				}
 				/*
@@ -495,12 +495,12 @@ void SSD_13XX::changeMode(const enum SSD_13XX_modes m)
 				writecommand_cont(CMD_DISPLAYOFF);
 				_currentMode = 6;
 			break;
-			/*
+			
 			case DISP_DIM:
 				writecommand_cont(CMD_DISPLAYDIM);
 				_currentMode = 7;
 			break;
-			*/
+			
 			case PROTECT:
 				#if defined(_SSD_1331_REG_H_) || defined(_SSD_1351_REG_H_)
 				setRegister_cont(CMD_CMDLOCK,0x16);//lock
@@ -731,13 +731,14 @@ a:Set number of column as horizontal scroll offset Range: 0d-95d ( no horizontal
 b:Define start row address
 c:Set number of rows to be horizontal scrolled B[5:0]+C[6:0] <=64
 d:Set number of row as vertical scroll offset Range: 0d-63d ( no vertical scroll if equals to 0)
-e:Set time interval between each scroll step
+e:Set time interval between each scroll step (0-3: 6, 10, 100, 200 frames)
 */
-void SSD_13XX::defineScrollArea(int16_t a, int16_t b, int16_t c, int16_t d, uint8_t e)
+void SSD_13XX::defineScrollArea(int8_t a, int8_t b, int8_t c, int8_t d, uint8_t e)
 {
 	if (b+c > SSD_HEIGHT) return;
 	uint8_t spd = 0;
-	e = e % 4;
+	//e = e % 4;
+	if (e > 3) e = 3;
 	#if defined(_SSD_1331_REG_H_) || defined(_SSD_1332_REG_H_)
 		if (e == 0){
 			spd = 0b00000000;
